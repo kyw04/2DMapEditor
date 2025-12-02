@@ -1,4 +1,5 @@
 using UnityEngine;
+using TMPro;
 
 namespace MapEditor
 {
@@ -6,9 +7,11 @@ namespace MapEditor
     {
         public GameObject headerView;
         public GameObject objectView;
+        public TextMeshProUGUI headerTxt;
 
         private VerticalScrollSizeController sizeController;
-        
+
+        private string currentHeader;
         private bool isSelectHeader;
 
         private void Start()
@@ -26,10 +29,22 @@ namespace MapEditor
                 ScrollViewOnOff(objectView);
         }
 
-        public void ObjectViewOnOff()
+        public void ObjectViewOnOff(string headerID)
         {
-            ScrollViewOnOff(objectView);
-            sizeController.SetHeight();
+            if (currentHeader == headerID)
+            {
+                headerTxt.text = currentHeader = "None";
+                ScrollViewOnOff(objectView);
+            }
+            else
+            {
+                headerTxt.text = currentHeader = headerID; // change obj scroll
+                isSelectHeader = objectView.activeSelf;
+                sizeController.SetHeight();
+                if (!isSelectHeader)
+                    ScrollViewOnOff(objectView);
+            }
+            
         }
         
         private void ScrollViewOnOff(GameObject target)
