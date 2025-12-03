@@ -23,11 +23,11 @@ namespace MapEditor
         
         private Transform followTarget;
         private Vector3 targetPosition;
-        private Vector2 lastSinglePos;
+        private Vector2 midPosition;
         private Vector2 lastTouch0, lastTouch1;
         private float targetOrthoSize;
         private float targetDistance;
-        private bool isDragging;
+        // private bool isDragging;
         private bool hadTwoTouchesLastFrame;
         
         private void Reset()
@@ -70,52 +70,52 @@ namespace MapEditor
         {
             switch (count)
             {
-                case 1: PanHandle(); break;
-                case 2: ZoomHandle(); break;
+                case 1: MoveCamera(); break;
+                case 2: MoveAndZoom(); break;
             }
         }
 
-        private void PanHandle()
+        private void MoveCamera()
         {
-            Touch t = Touch.activeTouches[0];
-            Vector2 pos = t.screenPosition;
-
-            if (t.phase == TouchPhase.Began)
-            {
-                isDragging = true;
-                lastSinglePos = pos;
-                hadTwoTouchesLastFrame = false;
-            }
-            else if (t.phase == TouchPhase.Moved && isDragging)
-            {
-                Vector2 delta = pos - lastSinglePos;
-                lastSinglePos = pos;
-
-                float dir = invertPan ? 1f : -1f;
-                Vector3 pan = ScreenDeltaToWorld(delta, dir);
-                if (lockX) pan.x = 0f;
-                if (lockY) pan.y = 0f;
-                targetPosition += pan;
-            }
-            else if (t.phase == TouchPhase.Ended || t.phase == TouchPhase.Canceled)
-            {
-                isDragging = false;
-            }
+            // Touch t = Touch.activeTouches[0];
+            // Vector2 pos = t.screenPosition;
+            //
+            // if (t.phase == TouchPhase.Began)
+            // {
+            //     isDragging = true;
+            //     hadTwoTouchesLastFrame = false;
+            // }
+            // else if (t.phase == TouchPhase.Moved && isDragging)
+            // {
+            //     Vector2 delta = pos - lastSinglePos;
+            //     lastSinglePos = pos;
+            //
+            //     float dir = invertPan ? 1f : -1f;
+            //     Vector3 pan = ScreenDeltaToWorld(delta, dir);
+            //     if (lockX) pan.x = 0f;
+            //     if (lockY) pan.y = 0f;
+            //     targetPosition += pan;
+            // }
+            // else if (t.phase == TouchPhase.Ended || t.phase == TouchPhase.Canceled)
+            // {
+            //     isDragging = false;
+            // }
         }
 
-        private void ZoomHandle()
+        private void MoveAndZoom()
         {
             Touch t0 = Touch.activeTouches[0];
             Touch t1 = Touch.activeTouches[1];
             Vector2 cur0 = t0.screenPosition;
             Vector2 cur1 = t1.screenPosition;
+            Vector2 curMid = (cur0 + cur1) * 0.5f;
 
             if (!hadTwoTouchesLastFrame)
             {
                 lastTouch0 = cur0;
                 lastTouch1 = cur1;
+                midPosition = curMid;
                 hadTwoTouchesLastFrame = true;
-                isDragging = false;
             }
             else
             {
@@ -133,12 +133,14 @@ namespace MapEditor
                     targetDistance -= deltaDist * pinchZoomSpeed;
                     targetDistance = Mathf.Clamp(targetDistance, minDistance, maxDistance);
                 }
-
+                
+                Vector2 delta = curMid - midPosition;
                 Vector2 prevMid = (lastTouch0 + lastTouch1) * 0.5f;
-                Vector2 curMid = (cur0 + cur1) * 0.5f;
                 Vector2 midDelta = curMid - prevMid;
                 float dir = invertPan ? 1f : -1f;
                 Vector3 pan = ScreenDeltaToWorld(midDelta, dir);
+                if (delta.magnitude > 0.5f) 
+                    pan = ScreenDeltaToWorld(delta, dir);
                 if (lockX) pan.x = 0f;
                 if (lockY) pan.y = 0f;
                 targetPosition += pan;
