@@ -44,7 +44,8 @@ namespace MapEditor
                 enabled = false;
                 return;
             }
-            
+
+            followTarget = cam.transform;
             targetPosition = followTarget != null ? followTarget.position : cam.transform.position;
 
             if (cam.orthographic)
@@ -77,6 +78,7 @@ namespace MapEditor
 
         private void MoveCamera()
         {
+            Debug.Log("CameraController: MoveCamera function");
             // Touch t = Touch.activeTouches[0];
             // Vector2 pos = t.screenPosition;
             //
@@ -104,6 +106,8 @@ namespace MapEditor
 
         private void MoveAndZoom()
         {
+            Debug.Log("CameraController: MoveAndZoom function");
+
             Touch t0 = Touch.activeTouches[0];
             Touch t1 = Touch.activeTouches[1];
             Vector2 cur0 = t0.screenPosition;
