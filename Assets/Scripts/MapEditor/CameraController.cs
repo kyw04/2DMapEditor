@@ -65,12 +65,14 @@ namespace MapEditor
         private void Update()
         {
             TouchHandleManager(Touch.activeTouches.Count);
+            cam.transform.position = targetPosition;
         }
 
         private void TouchHandleManager(int count)
         {
             switch (count)
             {
+                case 0: hadTwoTouchesLastFrame = false; break;
                 case 1: MoveCamera(); break;
                 case 2: MoveAndZoom(); break;
             }
