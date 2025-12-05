@@ -27,7 +27,6 @@ namespace MapEditor
         private Vector2 lastTouch0, lastTouch1;
         private float targetOrthoSize;
         private float targetDistance;
-        // private bool isDragging;
         private bool hadTwoTouchesLastFrame;
         
         private void Reset()
@@ -66,6 +65,7 @@ namespace MapEditor
         {
             TouchHandleManager(Touch.activeTouches.Count);
             cam.transform.position = targetPosition;
+            // cam.orthographicSize = targetOrthoSize;
         }
 
         private void TouchHandleManager(int count)
@@ -140,13 +140,11 @@ namespace MapEditor
                     targetDistance = Mathf.Clamp(targetDistance, minDistance, maxDistance);
                 }
                 
-                Vector2 delta = curMid - midPosition;
                 Vector2 prevMid = (lastTouch0 + lastTouch1) * 0.5f;
                 Vector2 midDelta = curMid - prevMid;
                 float dir = invertPan ? 1f : -1f;
                 Vector3 pan = ScreenDeltaToWorld(midDelta, dir);
-                if (delta.magnitude > 0.5f) 
-                    pan = ScreenDeltaToWorld(delta, dir);
+                
                 if (lockX) pan.x = 0f;
                 if (lockY) pan.y = 0f;
                 targetPosition += pan;
