@@ -6,27 +6,27 @@ namespace MapEditor
 {
     public class CameraController : MonoBehaviour
     {
+        
         public Camera cam;
 
-        [Header("Pan")]
-        public float panSpeed = 1.0f;
-        public bool invertPan;
+        [Header("Movement")]
+        public float moveSpeed = 1f;
+        public float moveSensitivity = 1f;
+        public bool invert;
         public bool lockX;
         public bool lockY;
 
         [Header("Zoom")]
         public float pinchZoomSpeed;
+        public float zoomSensitivity = 30f;
         public float minOrthoSize = 2f;
         public float maxOrthoSize = 50f;
-        public float minDistance = 2f;
-        public float maxDistance = 50f;
         
         private Transform followTarget;
         private Vector3 targetPosition;
-        private Vector2 midPosition;
         private Vector2 lastTouch0, lastTouch1;
         private float targetOrthoSize;
-        private float targetDistance;
+        private float velocity;
         private bool hadTwoTouchesLastFrame;
         
         private void Reset()
@@ -53,11 +53,7 @@ namespace MapEditor
             }
             else
             {
-                targetDistance = (followTarget != null)
-                    ? Vector3.Distance(cam.transform.position, followTarget.position)
-                    : Vector3.Distance(cam.transform.position, Vector3.zero);
-                Vector3 e = cam.transform.eulerAngles;
-                
+                Debug.LogWarning("CameraController: Camera projection is not \"Orthographic\".");
             }
         }
 
@@ -65,51 +61,21 @@ namespace MapEditor
         {
             TouchHandleManager(Touch.activeTouches.Count);
             cam.transform.position = targetPosition;
-            // cam.orthographicSize = targetOrthoSize;
+            cam.orthographicSize = targetOrthoSize;
         }
 
         private void TouchHandleManager(int count)
         {
             switch (count)
             {
-                case 0: hadTwoTouchesLastFrame = false; break;
-                case 1: MoveCamera(); break;
+                case 0: case 1: hadTwoTouchesLastFrame = false; break;
                 case 2: MoveAndZoom(); break;
             }
         }
 
-        private void MoveCamera()
-        {
-            Debug.Log("CameraController: MoveCamera function");
-            // Touch t = Touch.activeTouches[0];
-            // Vector2 pos = t.screenPosition;
-            //
-            // if (t.phase == TouchPhase.Began)
-            // {
-            //     isDragging = true;
-            //     hadTwoTouchesLastFrame = false;
-            // }
-            // else if (t.phase == TouchPhase.Moved && isDragging)
-            // {
-            //     Vector2 delta = pos - lastSinglePos;
-            //     lastSinglePos = pos;
-            //
-            //     float dir = invertPan ? 1f : -1f;
-            //     Vector3 pan = ScreenDeltaToWorld(delta, dir);
-            //     if (lockX) pan.x = 0f;
-            //     if (lockY) pan.y = 0f;
-            //     targetPosition += pan;
-            // }
-            // else if (t.phase == TouchPhase.Ended || t.phase == TouchPhase.Canceled)
-            // {
-            //     isDragging = false;
-            // }
-        }
 
         private void MoveAndZoom()
         {
-            Debug.Log("CameraController: MoveAndZoom function");
-
             Touch t0 = Touch.activeTouches[0];
             Touch t1 = Touch.activeTouches[1];
             Vector2 cur0 = t0.screenPosition;
@@ -120,7 +86,6 @@ namespace MapEditor
             {
                 lastTouch0 = cur0;
                 lastTouch1 = cur1;
-                midPosition = curMid;
                 hadTwoTouchesLastFrame = true;
             }
             else
@@ -128,27 +93,25 @@ namespace MapEditor
                 float prevDist = (lastTouch0 - lastTouch1).magnitude;
                 float curDist = (cur0 - cur1).magnitude;
                 float deltaDist = curDist - prevDist;
+                Vector2 prevMid = (lastTouch0 + lastTouch1) * 0.5f;
+                Vector2 midDelta = curMid - prevMid;
+                
+                if (midDelta.magnitude >= moveSensitivity)
+                {
+                    float dir = invert ? 1f : -1f;
+                    Vector3 pan = ScreenDeltaToWorld(midDelta, dir);
+                
+                    if (lockX) pan.x = 0f;
+                    if (lockY) pan.y = 0f;
+                    targetPosition += pan;
+                }
 
-                if (cam.orthographic)
+                if (Mathf.Abs(deltaDist) >= zoomSensitivity)
                 {
                     targetOrthoSize -= deltaDist * pinchZoomSpeed;
                     targetOrthoSize = Mathf.Clamp(targetOrthoSize, minOrthoSize, maxOrthoSize);
                 }
-                else
-                {
-                    targetDistance -= deltaDist * pinchZoomSpeed;
-                    targetDistance = Mathf.Clamp(targetDistance, minDistance, maxDistance);
-                }
                 
-                Vector2 prevMid = (lastTouch0 + lastTouch1) * 0.5f;
-                Vector2 midDelta = curMid - prevMid;
-                float dir = invertPan ? 1f : -1f;
-                Vector3 pan = ScreenDeltaToWorld(midDelta, dir);
-                
-                if (lockX) pan.x = 0f;
-                if (lockY) pan.y = 0f;
-                targetPosition += pan;
-
                 lastTouch0 = cur0;
                 lastTouch1 = cur1;
             }
@@ -171,7 +134,7 @@ namespace MapEditor
                 scale = (dist * 2f) / screenHeight;
             }
 
-            Vector3 pan = (right * deltaPixels.x + up * deltaPixels.y) * (scale * panSpeed * dir);
+            Vector3 pan = (right * deltaPixels.x + up * deltaPixels.y) * (scale * moveSpeed * dir);
             return pan;
         }
     }
