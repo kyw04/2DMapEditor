@@ -32,7 +32,6 @@ namespace MapEditor
 
         public void ObjectViewOnOff(string headerID)
         {
-            Debug.Log($"currentHeader {currentHeader}, headerID {headerID}");
             if (currentHeader == headerID)
             {
                 objectView.SetActive(!objectView.activeSelf);
