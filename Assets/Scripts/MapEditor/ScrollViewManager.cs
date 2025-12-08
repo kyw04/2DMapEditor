@@ -33,12 +33,10 @@ namespace MapEditor
         {
             if (currentHeader == headerID)
             {
-                headerTxt.text = currentHeader = "None";
                 ScrollViewOnOff(objectView);
             }
             else
             {
-                headerTxt.text = currentHeader = headerID; // change obj scroll
                 isSelectHeader = objectView.activeSelf;
                 sizeController.SetHeight();
                 if (!isSelectHeader)

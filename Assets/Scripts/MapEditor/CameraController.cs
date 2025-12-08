@@ -1,12 +1,11 @@
 using UnityEngine;
 using Touch = UnityEngine.InputSystem.EnhancedTouch.Touch;
-using TouchPhase = UnityEngine.InputSystem.TouchPhase;
+using UnityEngine.EventSystems;
 
 namespace MapEditor
 {
     public class CameraController : MonoBehaviour
     {
-        
         public Camera cam;
 
         [Header("Movement")]
@@ -17,13 +16,14 @@ namespace MapEditor
         public bool lockY;
 
         [Header("Zoom")]
-        public float pinchZoomSpeed;
+        public float zoomSpeed;
         public float zoomSensitivity = 30f;
         public float minOrthoSize = 2f;
         public float maxOrthoSize = 50f;
         
         private Transform followTarget;
         private Vector3 targetPosition;
+        private Vector2 screenCenter;
         private Vector2 lastTouch0, lastTouch1;
         private float targetOrthoSize;
         private float velocity;
@@ -46,7 +46,7 @@ namespace MapEditor
 
             followTarget = cam.transform;
             targetPosition = followTarget != null ? followTarget.position : cam.transform.position;
-
+            screenCenter = new Vector2(Screen.width * 0.5f, Screen.height * 0.5f);
             if (cam.orthographic)
             {
                 targetOrthoSize = cam.orthographicSize;
@@ -60,15 +60,43 @@ namespace MapEditor
         private void Update()
         {
             TouchHandleManager(Touch.activeTouches.Count);
-            cam.transform.position = targetPosition;
+            followTarget.position = targetPosition;
             cam.orthographicSize = targetOrthoSize;
         }
 
         private void TouchHandleManager(int count)
         {
+            
+            
             switch (count)
             {
-                case 0: case 1: hadTwoTouchesLastFrame = false; break;
+                case 0: hadTwoTouchesLastFrame = false; break;
+                case 1:
+                {
+                    Touch t = Touch.activeTouches[0];
+                    Vector2 cur = t.screenPosition;
+                    Ray ray = cam.ScreenPointToRay(new Vector3(cur.x, 0, cur.y));
+
+                    if (EventSystem.current.IsPointerOverGameObject())
+                        return;
+                    
+                    if (!hadTwoTouchesLastFrame)
+                    {
+                        lastTouch0 = cur;
+                        hadTwoTouchesLastFrame = true;
+                    }
+                    else
+                    {
+                        Vector2 delta = (cur - lastTouch0);
+                    
+                        float dir = invert ? 1f : -1f;
+                        Vector3 pan = ScreenDeltaToWorld(delta, dir);
+                        targetPosition += pan;
+                    }
+
+                    lastTouch0 = cur;
+                    break;
+                }
                 case 2: MoveAndZoom(); break;
             }
         }
@@ -103,12 +131,17 @@ namespace MapEditor
                 
                     if (lockX) pan.x = 0f;
                     if (lockY) pan.y = 0f;
-                    targetPosition += pan;
+                    // targetPosition += pan;
                 }
 
                 if (Mathf.Abs(deltaDist) >= zoomSensitivity)
                 {
-                    targetOrthoSize -= deltaDist * pinchZoomSpeed;
+                    midDelta = (screenCenter - curMid).normalized;
+                    // Debug.Log($"curMid {curMid}, prevMid {prevMid}");
+                    // Debug.Log($"midDelta {midDelta}");
+
+                    targetPosition += ScreenDeltaToWorld(midDelta, -1);
+                    targetOrthoSize -= deltaDist * zoomSpeed;
                     targetOrthoSize = Mathf.Clamp(targetOrthoSize, minOrthoSize, maxOrthoSize);
                 }
                 
@@ -123,17 +156,7 @@ namespace MapEditor
             Vector3 right = followTarget.right;
             Vector3 up = followTarget.up;
 
-            float scale;
-            if (cam.orthographic)
-            {
-                scale = (cam.orthographicSize * 2f) / screenHeight;
-            }
-            else
-            {
-                float dist = followTarget != null ? Vector3.Distance(cam.transform.position, followTarget.position) : 10f;
-                scale = (dist * 2f) / screenHeight;
-            }
-
+            float scale = (cam.orthographicSize * 2f) / screenHeight;
             Vector3 pan = (right * deltaPixels.x + up * deltaPixels.y) * (scale * moveSpeed * dir);
             return pan;
         }
