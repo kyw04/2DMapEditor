@@ -5,49 +5,45 @@ namespace MapEditor
 {
     public class ScrollViewManager : MonoBehaviour
     {
+        public GameObject backgroundShield;
         public GameObject headerView;
         public GameObject objectView;
-        public TextMeshProUGUI headerTxt;
 
         private VerticalScrollSizeController sizeController;
-
         private string currentHeader;
-        private bool isSelectHeader;
 
         private void Start()
         {
+            backgroundShield.SetActive(false);
             headerView.SetActive(false);
             objectView.SetActive(false);
             sizeController = objectView.GetComponentInChildren<VerticalScrollSizeController>();
-            isSelectHeader = false;
         }
 
         public void HeaderViewOnOff()
         {
-            ScrollViewOnOff(headerView);
-            if (!headerView.activeSelf && objectView.activeSelf)
-                ScrollViewOnOff(objectView);
+            headerView.SetActive(!headerView.activeSelf);
+            backgroundShield.SetActive(headerView.activeSelf);
+            if (!headerView.activeSelf)
+            {
+                objectView.SetActive(false);
+            }
         }
 
         public void ObjectViewOnOff(string headerID)
         {
+            Debug.Log($"currentHeader {currentHeader}, headerID {headerID}");
             if (currentHeader == headerID)
             {
-                ScrollViewOnOff(objectView);
+                objectView.SetActive(!objectView.activeSelf);
             }
             else
             {
-                isSelectHeader = objectView.activeSelf;
                 sizeController.SetHeight();
-                if (!isSelectHeader)
-                    ScrollViewOnOff(objectView);
+                objectView.SetActive(true);
             }
-            
-        }
-        
-        private void ScrollViewOnOff(GameObject target)
-        {
-            target.SetActive(!target.activeSelf);
+
+            currentHeader = headerID;
         }
     }
 }

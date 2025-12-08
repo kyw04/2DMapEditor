@@ -1,5 +1,6 @@
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using Touch = UnityEngine.InputSystem.EnhancedTouch.Touch;
 
 namespace MapEditor.Pencil
@@ -10,16 +11,12 @@ namespace MapEditor.Pencil
         public int size { get; private set; }
         public Color32 color { get; private set; }
 
-        public void SetSize(int value)
+        public void Setting(int size, Color32 color)
         {
-            size = value;
+            this.size = size;
+            this.color = color;
         }
-
-        public void SetColor(Color32 value)
-        {
-            color = value;
-        }
-
+        
         public void Draw()
         {
             if (Touch.activeTouches.Count > 0)
@@ -29,7 +26,8 @@ namespace MapEditor.Pencil
                 float y = Mathf.Floor(temp.y);
                 Vector3 pos = new Vector3(x, y);
                 
-                if (Physics2D.Raycast(pos, Vector3.forward))
+                if (Physics2D.Raycast(pos, Vector3.forward) ||
+                    EventSystem.current.IsPointerOverGameObject())
                     return;
 
                 pos.z = 0;
@@ -39,7 +37,8 @@ namespace MapEditor.Pencil
         
         protected virtual void Render(Vector3 pos)
         {
-            Instantiate(obj, pos, quaternion.identity);
+            var Render = Instantiate(obj, pos, quaternion.identity).GetComponent<SpriteRenderer>();
+            Render.color = color;
         }
     }
 }
