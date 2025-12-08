@@ -7,7 +7,8 @@ namespace MapEditor
     public class CameraController : MonoBehaviour
     {
         public Camera cam;
-
+        public bool isMove;
+        
         [Header("Movement")]
         public float moveSpeed = 1f;
         public float moveSensitivity = 1f;
@@ -59,6 +60,9 @@ namespace MapEditor
 
         private void Update()
         {
+            if (!isMove)
+                return;
+            
             TouchHandleManager(Touch.activeTouches.Count);
             followTarget.position = targetPosition;
             cam.orthographicSize = targetOrthoSize;
