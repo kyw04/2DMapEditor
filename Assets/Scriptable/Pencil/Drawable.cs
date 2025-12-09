@@ -5,7 +5,7 @@ using Touch = UnityEngine.InputSystem.EnhancedTouch.Touch;
 
 namespace MapEditor.Pencil
 {
-    public abstract class Drawable : MonoBehaviour
+    public abstract class Drawable : ScriptableObject
     {
         public GameObject obj;
         public int size { get; private set; }

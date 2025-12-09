@@ -2096,7 +2096,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a155921f747d804d9c08bf3e1a27ef4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MapEditor.PanManager
-  pencil: {fileID: 1334485728585359214, guid: 795310ff5a982204a8833ff0f2741c05, type: 3}
+  pencil: {fileID: 11400000, guid: de73057f893831a4e9f798cb74c6707b, type: 2}
   size: 1
   color:
     serializedVersion: 2
@@ -5358,7 +5358,6 @@ MonoBehaviour:
   backgroundShield: {fileID: 2120397862}
   headerView: {fileID: 1253408527}
   objectView: {fileID: 1028724714}
-  headerTxt: {fileID: 0}
 --- !u!114 &1765662348
 MonoBehaviour:
   m_ObjectHideFlags: 0
