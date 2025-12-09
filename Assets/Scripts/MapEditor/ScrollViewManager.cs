@@ -44,5 +44,10 @@ namespace MapEditor
 
             currentHeader = headerID;
         }
+
+        public void Test(ScrollData data)
+        {
+            Debug.Log(data.headerID);
+        }
     }
 }
