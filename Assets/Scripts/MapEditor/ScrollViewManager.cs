@@ -10,7 +10,7 @@ namespace MapEditor
         public GameObject objectView;
 
         private VerticalScrollSizeController sizeController;
-        private string currentHeader;
+        private ScrollData currentScroll;
 
         private void Start()
         {
@@ -30,9 +30,9 @@ namespace MapEditor
             }
         }
 
-        public void ObjectViewOnOff(string headerID)
+        public void ObjectViewOnOff(ScrollData data)
         {
-            if (currentHeader == headerID)
+            if (currentScroll == data)
             {
                 objectView.SetActive(!objectView.activeSelf);
             }
@@ -42,12 +42,7 @@ namespace MapEditor
                 objectView.SetActive(true);
             }
 
-            currentHeader = headerID;
-        }
-
-        public void Test(ScrollData data)
-        {
-            Debug.Log(data.headerID);
+            currentScroll = data;
         }
     }
 }

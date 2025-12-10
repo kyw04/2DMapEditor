@@ -1635,7 +1635,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1765662347}
         m_TargetAssemblyTypeName: MapEditor.ScrollViewManager, Assembly-CSharp
-        m_MethodName: Test
+        m_MethodName: ObjectViewOnOff
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 11400000, guid: 43b21155269fad7448b327036a7a0fb6, type: 2}
@@ -2202,10 +2202,10 @@ MonoBehaviour:
       - m_Target: {fileID: 1765662347}
         m_TargetAssemblyTypeName: MapEditor.ScrollViewManager, Assembly-CSharp
         m_MethodName: ObjectViewOnOff
-        m_Mode: 5
+        m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgument: {fileID: 11400000, guid: 43b21155269fad7448b327036a7a0fb6, type: 2}
+          m_ObjectArgumentAssemblyTypeName: MapEditor.ScrollData, Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 2
@@ -6578,10 +6578,10 @@ MonoBehaviour:
       - m_Target: {fileID: 1765662347}
         m_TargetAssemblyTypeName: MapEditor.ScrollViewManager, Assembly-CSharp
         m_MethodName: ObjectViewOnOff
-        m_Mode: 5
+        m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgument: {fileID: 11400000, guid: 43b21155269fad7448b327036a7a0fb6, type: 2}
+          m_ObjectArgumentAssemblyTypeName: MapEditor.ScrollData, Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 3
