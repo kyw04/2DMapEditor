@@ -8,6 +8,7 @@ namespace MapEditor
         public GameObject backgroundShield;
         public GameObject headerView;
         public GameObject objectView;
+        public Transform objectViewContent;
 
         private VerticalScrollSizeController sizeController;
         private ScrollData currentScroll;
@@ -38,6 +39,7 @@ namespace MapEditor
             }
             else
             {
+                data.ButtonSetting(objectViewContent);
                 sizeController.SetHeight();
                 objectView.SetActive(true);
             }
