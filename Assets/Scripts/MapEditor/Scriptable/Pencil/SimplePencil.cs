@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace MapEditor.Pencil
@@ -7,7 +8,8 @@ namespace MapEditor.Pencil
     {
         protected override void Render(Vector3 pos)
         {
-            var render = Instantiate(obj, pos, Quaternion.identity).GetComponent<SpriteRenderer>();
+            var render = Instantiate(defaultObj, pos, Quaternion.identity).GetComponent<SpriteRenderer>();
+            render.sprite = sprite;
             render.color = color;
         }
     }

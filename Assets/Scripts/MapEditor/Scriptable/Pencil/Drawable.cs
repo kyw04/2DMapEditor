@@ -1,4 +1,3 @@
-using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using Touch = UnityEngine.InputSystem.EnhancedTouch.Touch;
@@ -7,7 +6,8 @@ namespace MapEditor.Pencil
 {
     public abstract class Drawable : ScriptableObject
     {
-        public GameObject obj;
+        public GameObject defaultObj;
+        public Sprite sprite;
         public int size;
         public Color32 color;
 
