@@ -22,8 +22,8 @@ namespace MapEditor.Pencil
             if (Touch.activeTouches.Count > 0)
             {
                 Vector3 temp = Camera.main.ScreenToWorldPoint(Touch.activeTouches[0].screenPosition);
-                float x = Mathf.Floor(temp.x);
-                float y = Mathf.Floor(temp.y);
+                float x = Mathf.Round(temp.x);
+                float y = Mathf.Round(temp.y);
                 Vector3 pos = new Vector3(x, y);
                 
                 if (Physics2D.Raycast(pos, Vector3.forward) ||
