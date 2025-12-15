@@ -8,8 +8,8 @@ namespace MapEditor.Pencil
     public abstract class Drawable : ScriptableObject
     {
         public GameObject obj;
-        public int size { get; private set; }
-        public Color32 color { get; private set; }
+        public int size;
+        public Color32 color;
 
         public void Setting(int size, Color32 color)
         {
@@ -34,11 +34,7 @@ namespace MapEditor.Pencil
                 Render(pos);
             }
         }
-        
-        protected virtual void Render(Vector3 pos)
-        {
-            var Render = Instantiate(obj, pos, quaternion.identity).GetComponent<SpriteRenderer>();
-            Render.color = color;
-        }
+
+        protected abstract void Render(Vector3 pos);
     }
 }

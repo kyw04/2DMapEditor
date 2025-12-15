@@ -1,3 +1,4 @@
+using MapEditor.Pencil;
 using UnityEngine;
 using TMPro;
 
@@ -5,6 +6,7 @@ namespace MapEditor
 {
     public class ScrollViewManager : MonoBehaviour
     {
+        public PencilManager pencilManager;
         public GameObject backgroundShield;
         public GameObject headerView;
         public GameObject objectView;
@@ -39,7 +41,7 @@ namespace MapEditor
             }
             else
             {
-                data.ButtonSetting(objectViewContent);
+                data.ButtonSetting(this);
                 sizeController.SetHeight();
                 objectView.SetActive(true);
             }

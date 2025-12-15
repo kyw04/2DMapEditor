@@ -12,4 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8d1bf503e852664abbe7b349ea6de1f, type: 3}
   m_Name: Pencil 3
   m_EditorClassIdentifier: Assembly-CSharp::MapEditor.Pencil.SimplePencil
-  obj: {fileID: 2400803431224416152, guid: 27e7f5152a53cea4dac881dec3b720f0, type: 3}
+  obj: {fileID: 2400803431224416152, guid: 462d95ede184958499dd6fb753b662e9, type: 3}
+  size: 1
+  color:
+    serializedVersion: 2
+    rgba: 4294967295

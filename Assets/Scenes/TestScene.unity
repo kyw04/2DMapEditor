@@ -153,10 +153,10 @@ RectTransform:
   - {fileID: 883670816}
   m_Father: {fileID: 1719937603}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 250, y: -290}
-  m_SizeDelta: {x: 460, y: 100}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &66164511
 MonoBehaviour:
@@ -201,19 +201,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 66164512}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1765662348}
-        m_TargetAssemblyTypeName: MapEditor.Spawner, Assembly-CSharp
-        m_MethodName: Create
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 2400803431224416152, guid: 27e7f5152a53cea4dac881dec3b720f0, type: 3}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &66164512
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -550,10 +538,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1719937603}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 250, y: -5}
-  m_SizeDelta: {x: 460, y: 10}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 10}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &210747716
 GameObject:
@@ -679,10 +667,10 @@ RectTransform:
   - {fileID: 413992544}
   m_Father: {fileID: 1719937603}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 250, y: -510}
-  m_SizeDelta: {x: 460, y: 100}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &217539414
 MonoBehaviour:
@@ -727,19 +715,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 217539415}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1765662348}
-        m_TargetAssemblyTypeName: MapEditor.Spawner, Assembly-CSharp
-        m_MethodName: Create
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 2400803431224416152, guid: 27e7f5152a53cea4dac881dec3b720f0, type: 3}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &217539415
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1596,10 +1572,10 @@ RectTransform:
   - {fileID: 302925432}
   m_Father: {fileID: 1188147583}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 125, y: -95}
-  m_SizeDelta: {x: 210, y: 150}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &476844068
 MonoBehaviour:
@@ -1977,10 +1953,10 @@ RectTransform:
   - {fileID: 1398323120}
   m_Father: {fileID: 1719937603}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 250, y: -1940}
-  m_SizeDelta: {x: 460, y: 100}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &679405921
 MonoBehaviour:
@@ -2025,19 +2001,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 679405922}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1765662348}
-        m_TargetAssemblyTypeName: MapEditor.Spawner, Assembly-CSharp
-        m_MethodName: Create
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 2400803431224416152, guid: 27e7f5152a53cea4dac881dec3b720f0, type: 3}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &679405922
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2110,10 +2074,10 @@ RectTransform:
   - {fileID: 921893504}
   m_Father: {fileID: 1719937603}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 250, y: -1500}
-  m_SizeDelta: {x: 460, y: 100}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &699534335
 MonoBehaviour:
@@ -2158,19 +2122,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 699534336}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1765662348}
-        m_TargetAssemblyTypeName: MapEditor.Spawner, Assembly-CSharp
-        m_MethodName: Create
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 2400803431224416152, guid: 27e7f5152a53cea4dac881dec3b720f0, type: 3}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &699534336
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2209,55 +2161,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 699534333}
   m_CullTransparentMesh: 1
---- !u!1 &732999710
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 732999712}
-  - component: {fileID: 732999711}
-  m_Layer: 0
-  m_Name: PanManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &732999711
+--- !u!114 &732999711 stripped
 MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 7258691719680777576, guid: 7b0026b0857af0a40a837e1e4fff920f, type: 3}
+  m_PrefabInstance: {fileID: 1799928643686540722}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 732999710}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0a155921f747d804d9c08bf3e1a27ef4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MapEditor.PanManager
-  pencil: {fileID: 11400000, guid: de73057f893831a4e9f798cb74c6707b, type: 2}
-  size: 1
-  color:
-    serializedVersion: 2
-    rgba: 4278190335
---- !u!4 &732999712
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 732999710}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 50.66864, y: 313.0759, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &791157326
 GameObject:
   m_ObjectHideFlags: 0
@@ -2292,10 +2206,10 @@ RectTransform:
   - {fileID: 413079141}
   m_Father: {fileID: 1719937603}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 250, y: -950}
-  m_SizeDelta: {x: 460, y: 100}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &791157328
 MonoBehaviour:
@@ -2340,19 +2254,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 791157329}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1765662348}
-        m_TargetAssemblyTypeName: MapEditor.Spawner, Assembly-CSharp
-        m_MethodName: Create
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 2400803431224416152, guid: 27e7f5152a53cea4dac881dec3b720f0, type: 3}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &791157329
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2425,10 +2327,10 @@ RectTransform:
   - {fileID: 963363365}
   m_Father: {fileID: 1719937603}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 250, y: -1610}
-  m_SizeDelta: {x: 460, y: 100}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &794155050
 MonoBehaviour:
@@ -2473,19 +2375,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 794155051}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1765662348}
-        m_TargetAssemblyTypeName: MapEditor.Spawner, Assembly-CSharp
-        m_MethodName: Create
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 2400803431224416152, guid: 27e7f5152a53cea4dac881dec3b720f0, type: 3}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &794155051
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2694,10 +2584,10 @@ RectTransform:
   - {fileID: 1043008392}
   m_Father: {fileID: 1188147583}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 125, y: -255}
-  m_SizeDelta: {x: 210, y: 150}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &889890455
 MonoBehaviour:
@@ -2963,10 +2853,10 @@ RectTransform:
   - {fileID: 1490279496}
   m_Father: {fileID: 1719937603}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 250, y: -1830}
-  m_SizeDelta: {x: 460, y: 100}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &906237334
 MonoBehaviour:
@@ -3011,19 +2901,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 906237335}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1765662348}
-        m_TargetAssemblyTypeName: MapEditor.Spawner, Assembly-CSharp
-        m_MethodName: Create
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 2400803431224416152, guid: 27e7f5152a53cea4dac881dec3b720f0, type: 3}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &906237335
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3228,10 +3106,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1188147583}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 125, y: -5}
-  m_SizeDelta: {x: 210, y: 10}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 10}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &963363364
 GameObject:
@@ -3612,63 +3490,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1043008391}
   m_CullTransparentMesh: 1
---- !u!1001 &1051563341
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 2400803431224416152, guid: 27e7f5152a53cea4dac881dec3b720f0, type: 3}
-      propertyPath: m_Name
-      value: Test Box
-      objectReference: {fileID: 0}
-    - target: {fileID: 4917009593931934998, guid: 27e7f5152a53cea4dac881dec3b720f0, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4917009593931934998, guid: 27e7f5152a53cea4dac881dec3b720f0, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4917009593931934998, guid: 27e7f5152a53cea4dac881dec3b720f0, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4917009593931934998, guid: 27e7f5152a53cea4dac881dec3b720f0, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4917009593931934998, guid: 27e7f5152a53cea4dac881dec3b720f0, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4917009593931934998, guid: 27e7f5152a53cea4dac881dec3b720f0, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4917009593931934998, guid: 27e7f5152a53cea4dac881dec3b720f0, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4917009593931934998, guid: 27e7f5152a53cea4dac881dec3b720f0, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4917009593931934998, guid: 27e7f5152a53cea4dac881dec3b720f0, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4917009593931934998, guid: 27e7f5152a53cea4dac881dec3b720f0, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 27e7f5152a53cea4dac881dec3b720f0, type: 3}
 --- !u!1 &1104885315
 GameObject:
   m_ObjectHideFlags: 0
@@ -3739,10 +3560,10 @@ RectTransform:
   - {fileID: 897868767}
   m_Father: {fileID: 1719937603}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 250, y: -400}
-  m_SizeDelta: {x: 460, y: 100}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1145361976
 MonoBehaviour:
@@ -3787,19 +3608,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1145361977}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1765662348}
-        m_TargetAssemblyTypeName: MapEditor.Spawner, Assembly-CSharp
-        m_MethodName: Create
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 2400803431224416152, guid: 27e7f5152a53cea4dac881dec3b720f0, type: 3}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1145361977
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4484,7 +4293,7 @@ GameObject:
   - component: {fileID: 1253522234}
   - component: {fileID: 1253522233}
   m_Layer: 5
-  m_Name: Button
+  m_Name: Button_20
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4505,10 +4314,10 @@ RectTransform:
   - {fileID: 1162716577}
   m_Father: {fileID: 1719937603}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 250, y: -70}
-  m_SizeDelta: {x: 460, y: 100}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1253522233
 MonoBehaviour:
@@ -4553,19 +4362,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1253522234}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1765662348}
-        m_TargetAssemblyTypeName: MapEditor.Spawner, Assembly-CSharp
-        m_MethodName: Create
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 2400803431224416152, guid: 27e7f5152a53cea4dac881dec3b720f0, type: 3}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1253522234
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4638,10 +4435,10 @@ RectTransform:
   - {fileID: 1169603963}
   m_Father: {fileID: 1719937603}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 250, y: -2050}
-  m_SizeDelta: {x: 460, y: 100}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1298430884
 MonoBehaviour:
@@ -4686,19 +4483,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1298430885}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1765662348}
-        m_TargetAssemblyTypeName: MapEditor.Spawner, Assembly-CSharp
-        m_MethodName: Create
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 2400803431224416152, guid: 27e7f5152a53cea4dac881dec3b720f0, type: 3}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1298430885
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4997,10 +4782,10 @@ RectTransform:
   - {fileID: 408171488}
   m_Father: {fileID: 1719937603}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 250, y: -620}
-  m_SizeDelta: {x: 460, y: 100}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1328005836
 MonoBehaviour:
@@ -5045,19 +4830,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1328005837}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1765662348}
-        m_TargetAssemblyTypeName: MapEditor.Spawner, Assembly-CSharp
-        m_MethodName: Create
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 2400803431224416152, guid: 27e7f5152a53cea4dac881dec3b720f0, type: 3}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1328005837
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5130,10 +4903,10 @@ RectTransform:
   - {fileID: 1320130062}
   m_Father: {fileID: 1719937603}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 250, y: -1390}
-  m_SizeDelta: {x: 460, y: 100}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1329238890
 MonoBehaviour:
@@ -5178,19 +4951,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1329238891}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1765662348}
-        m_TargetAssemblyTypeName: MapEditor.Spawner, Assembly-CSharp
-        m_MethodName: Create
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 2400803431224416152, guid: 27e7f5152a53cea4dac881dec3b720f0, type: 3}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1329238891
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5535,10 +5296,10 @@ RectTransform:
   - {fileID: 1849342451}
   m_Father: {fileID: 1719937603}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 250, y: -1280}
-  m_SizeDelta: {x: 460, y: 100}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1466874413
 MonoBehaviour:
@@ -5583,19 +5344,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1466874414}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1765662348}
-        m_TargetAssemblyTypeName: MapEditor.Spawner, Assembly-CSharp
-        m_MethodName: Create
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 2400803431224416152, guid: 27e7f5152a53cea4dac881dec3b720f0, type: 3}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1466874414
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5668,10 +5417,10 @@ RectTransform:
   - {fileID: 2082232263}
   m_Father: {fileID: 1719937603}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 250, y: -2160}
-  m_SizeDelta: {x: 460, y: 100}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1469417732
 MonoBehaviour:
@@ -5716,19 +5465,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1469417733}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1765662348}
-        m_TargetAssemblyTypeName: MapEditor.Spawner, Assembly-CSharp
-        m_MethodName: Create
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 2400803431224416152, guid: 27e7f5152a53cea4dac881dec3b720f0, type: 3}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1469417733
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6281,7 +6018,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 210077223}
-  - {fileID: 1253522232}
   - {fileID: 2003443650}
   - {fileID: 66164510}
   - {fileID: 1145361975}
@@ -6301,6 +6037,7 @@ RectTransform:
   - {fileID: 679405920}
   - {fileID: 1298430883}
   - {fileID: 1469417731}
+  - {fileID: 1253522232}
   m_Father: {fileID: 1313665944}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
@@ -6380,10 +6117,10 @@ RectTransform:
   - {fileID: 1161296947}
   m_Father: {fileID: 1719937603}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 250, y: -1060}
-  m_SizeDelta: {x: 460, y: 100}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1730853215
 MonoBehaviour:
@@ -6428,19 +6165,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1730853216}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1765662348}
-        m_TargetAssemblyTypeName: MapEditor.Spawner, Assembly-CSharp
-        m_MethodName: Create
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 2400803431224416152, guid: 27e7f5152a53cea4dac881dec3b720f0, type: 3}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1730853216
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6513,10 +6238,10 @@ RectTransform:
   - {fileID: 1434756598}
   m_Father: {fileID: 1719937603}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 250, y: -840}
-  m_SizeDelta: {x: 460, y: 100}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1733697099
 MonoBehaviour:
@@ -6561,19 +6286,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1733697100}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1765662348}
-        m_TargetAssemblyTypeName: MapEditor.Spawner, Assembly-CSharp
-        m_MethodName: Create
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 2400803431224416152, guid: 27e7f5152a53cea4dac881dec3b720f0, type: 3}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1733697100
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6646,10 +6359,10 @@ RectTransform:
   - {fileID: 119146738}
   m_Father: {fileID: 1719937603}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 250, y: -730}
-  m_SizeDelta: {x: 460, y: 100}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1754241080
 MonoBehaviour:
@@ -6694,19 +6407,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1754241081}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1765662348}
-        m_TargetAssemblyTypeName: MapEditor.Spawner, Assembly-CSharp
-        m_MethodName: Create
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 2400803431224416152, guid: 27e7f5152a53cea4dac881dec3b720f0, type: 3}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1754241081
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6838,6 +6539,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffe917f44e11a0247a977273cc07c887, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MapEditor.ScrollViewManager
+  pencilManager: {fileID: 732999711}
   backgroundShield: {fileID: 2120397862}
   headerView: {fileID: 1253408527}
   objectView: {fileID: 1028724714}
@@ -7222,10 +6924,10 @@ RectTransform:
   - {fileID: 368938543}
   m_Father: {fileID: 1719937603}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 250, y: -180}
-  m_SizeDelta: {x: 460, y: 100}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2003443651
 MonoBehaviour:
@@ -7270,19 +6972,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2003443652}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1765662348}
-        m_TargetAssemblyTypeName: MapEditor.Spawner, Assembly-CSharp
-        m_MethodName: Create
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 2400803431224416152, guid: 27e7f5152a53cea4dac881dec3b720f0, type: 3}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &2003443652
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7611,10 +7301,10 @@ RectTransform:
   - {fileID: 1666282936}
   m_Father: {fileID: 1188147583}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 125, y: -415}
-  m_SizeDelta: {x: 210, y: 150}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2084463899
 MonoBehaviour:
@@ -7819,10 +7509,10 @@ RectTransform:
   - {fileID: 1698906422}
   m_Father: {fileID: 1719937603}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 250, y: -1170}
-  m_SizeDelta: {x: 460, y: 100}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2121871144
 MonoBehaviour:
@@ -7867,19 +7557,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2121871145}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1765662348}
-        m_TargetAssemblyTypeName: MapEditor.Spawner, Assembly-CSharp
-        m_MethodName: Create
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 2400803431224416152, guid: 27e7f5152a53cea4dac881dec3b720f0, type: 3}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &2121871145
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7952,10 +7630,10 @@ RectTransform:
   - {fileID: 553068853}
   m_Father: {fileID: 1719937603}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 250, y: -1720}
-  m_SizeDelta: {x: 460, y: 100}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2132547686
 MonoBehaviour:
@@ -8000,19 +7678,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2132547687}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1765662348}
-        m_TargetAssemblyTypeName: MapEditor.Spawner, Assembly-CSharp
-        m_MethodName: Create
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 2400803431224416152, guid: 27e7f5152a53cea4dac881dec3b720f0, type: 3}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &2132547687
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8051,6 +7717,63 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2132547684}
   m_CullTransparentMesh: 1
+--- !u!1001 &1799928643686540722
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4703792707036501339, guid: 7b0026b0857af0a40a837e1e4fff920f, type: 3}
+      propertyPath: m_Name
+      value: PencilManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 6503215546934751194, guid: 7b0026b0857af0a40a837e1e4fff920f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 50.66864
+      objectReference: {fileID: 0}
+    - target: {fileID: 6503215546934751194, guid: 7b0026b0857af0a40a837e1e4fff920f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 313.0759
+      objectReference: {fileID: 0}
+    - target: {fileID: 6503215546934751194, guid: 7b0026b0857af0a40a837e1e4fff920f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6503215546934751194, guid: 7b0026b0857af0a40a837e1e4fff920f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6503215546934751194, guid: 7b0026b0857af0a40a837e1e4fff920f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6503215546934751194, guid: 7b0026b0857af0a40a837e1e4fff920f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6503215546934751194, guid: 7b0026b0857af0a40a837e1e4fff920f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6503215546934751194, guid: 7b0026b0857af0a40a837e1e4fff920f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6503215546934751194, guid: 7b0026b0857af0a40a837e1e4fff920f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6503215546934751194, guid: 7b0026b0857af0a40a837e1e4fff920f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 7b0026b0857af0a40a837e1e4fff920f, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -8058,5 +7781,4 @@ SceneRoots:
   - {fileID: 1927111302}
   - {fileID: 236754864}
   - {fileID: 1765662346}
-  - {fileID: 732999712}
-  - {fileID: 1051563341}
+  - {fileID: 1799928643686540722}

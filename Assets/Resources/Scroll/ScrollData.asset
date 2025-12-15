@@ -12,13 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3a081345edfd6940aae802249ae46a1, type: 3}
   m_Name: ScrollData
   m_EditorClassIdentifier: Assembly-CSharp::MapEditor.ScrollData
-  buttonName:
-  - simple pencil
-  - simple pencil 2
-  - simple pencil 3
-  - simple pencil 4
-  pencil:
-  - {fileID: 11400000, guid: de73057f893831a4e9f798cb74c6707b, type: 2}
-  - {fileID: 11400000, guid: f03e4c05f9be9cf41b8fbc18af40025f, type: 2}
-  - {fileID: 11400000, guid: 104fa88931018a34eafedccfccedf4a9, type: 2}
-  - {fileID: 11400000, guid: 5882891a32fb2614f8b5be57c816fce1, type: 2}
+  pencilDatas:
+  - pencilName: Test Pencil 1
+    pencil: {fileID: 11400000, guid: f03e4c05f9be9cf41b8fbc18af40025f, type: 2}
+  - pencilName: Test Pencil 2
+    pencil: {fileID: 11400000, guid: 104fa88931018a34eafedccfccedf4a9, type: 2}
+  - pencilName: Test Pencil 3
+    pencil: {fileID: 11400000, guid: 5882891a32fb2614f8b5be57c816fce1, type: 2}
+  - pencilName: Test Pencil
+    pencil: {fileID: 11400000, guid: de73057f893831a4e9f798cb74c6707b, type: 2}

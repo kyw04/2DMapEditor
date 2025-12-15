@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using MapEditor.Pencil;
 using TMPro;
@@ -9,18 +10,30 @@ namespace MapEditor
     [CreateAssetMenu(menuName = "ScriptableObjects/ScrollData", fileName = "ScrollData", order = 1)]
     public class ScrollData : ScriptableObject
     {
-        public List<string> buttonName;
-        public List<Drawable> pencil;
-
-        public void ButtonSetting(Transform content)
+        [Serializable]
+        public struct PencilData
         {
-            Button[] children = content.GetComponentsInChildren<Button>();
+            public string pencilName;
+            public Drawable pencil;
+        }
+
+        public List<PencilData> pencilDatas;
+
+        public void ButtonSetting(ScrollViewManager scrollViewManager)
+        {
+            Button[] children = scrollViewManager.objectViewContent.GetComponentsInChildren<Button>();
             for (int i = 0; i < children.Length; i++)
             {
-                if (i < buttonName.Count)
+                if (i < pencilDatas.Count)
                 {
-                    children[i].GetComponentInChildren<TextMeshProUGUI>().text = buttonName[i];
-                    // children[i].onClick
+                    int index = i;
+                    children[i].onClick.RemoveAllListeners();
+                    children[i].onClick.AddListener(() =>
+                    {
+                        scrollViewManager.pencilManager.SelectPencil(pencilDatas[index].pencil);
+                        scrollViewManager.HeaderViewOnOff();
+                    });
+                    children[i].GetComponentInChildren<TextMeshProUGUI>().text = pencilDatas[index].pencilName;
                 }
                 else
                 {
