@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
-using Touch = UnityEngine.InputSystem.EnhancedTouch.Touch;
 
 namespace MapEditor.Pencil
 {
@@ -17,24 +16,20 @@ namespace MapEditor.Pencil
             this.color = color;
         }
         
-        public void Draw()
+        public GameObject Draw(Vector3 pos)
         {
-            if (Touch.activeTouches.Count > 0)
-            {
-                Vector3 temp = Camera.main.ScreenToWorldPoint(Touch.activeTouches[0].screenPosition);
-                float x = Mathf.Round(temp.x);
-                float y = Mathf.Round(temp.y);
-                Vector3 pos = new Vector3(x, y);
+            float x = Mathf.Round(pos.x);
+            float y = Mathf.Round(pos.y);
+            pos = new Vector3(x, y);
                 
-                if (Physics2D.Raycast(pos, Vector3.forward) ||
-                    EventSystem.current.IsPointerOverGameObject())
-                    return;
+            if (Physics2D.Raycast(pos, Vector3.forward) ||
+                EventSystem.current.IsPointerOverGameObject())
+                return null;
 
-                pos.z = 0;
-                Render(pos);
-            }
+            pos.z = 0;
+            return Render(pos);
         }
 
-        protected abstract void Render(Vector3 pos);
+        protected abstract GameObject Render(Vector3 pos);
     }
 }
