@@ -31,7 +31,6 @@ namespace MapEditor
                     children[i].onClick.AddListener(() =>
                     {
                         scrollViewManager.pencilManager.SelectPencil(pencilDatas[index].pencil);
-                        scrollViewManager.HeaderViewOnOff();
                     });
                     children[i].GetComponentInChildren<TextMeshProUGUI>().text = pencilDatas[index].pencilName;
                 }

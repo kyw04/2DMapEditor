@@ -12,15 +12,13 @@ namespace MapEditor
         public GameObject objectView;
         public Transform objectViewContent;
 
-        private VerticalScrollSizeController sizeController;
+        private ScrollSizeController sizeController;
         private ScrollData currentScroll;
 
         private void Start()
         {
             backgroundShield.SetActive(false);
-            headerView.SetActive(false);
-            objectView.SetActive(false);
-            sizeController = objectView.GetComponentInChildren<VerticalScrollSizeController>();
+            sizeController = objectView.GetComponentInChildren<ScrollSizeController>();
         }
 
         public void HeaderViewOnOff()
