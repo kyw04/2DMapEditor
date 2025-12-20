@@ -40,8 +40,8 @@ namespace MapEditor
             else
             {
                 data.ButtonSetting(this);
-                sizeController.SetHeight();
                 objectView.SetActive(true);
+                sizeController.SetHeight();
             }
 
             currentScroll = data;

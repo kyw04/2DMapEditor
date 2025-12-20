@@ -10,7 +10,8 @@ public class VerticalScrollSizeController : ScrollSizeController
     {
         base.Awake();
         layoutGroup = GetComponent<VerticalLayoutGroup>();
-        spacing = layoutGroup.spacing;
+        spacingY = layoutGroup.spacing;
+        top = layoutGroup.padding.top;
         bottom = layoutGroup.padding.bottom;
     }
 }

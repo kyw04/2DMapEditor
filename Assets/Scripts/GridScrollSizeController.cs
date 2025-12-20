@@ -5,12 +5,15 @@ using UnityEngine.UI;
 public class GridScrollSizeController : ScrollSizeController
 {
     private GridLayoutGroup layoutGroup;
+    private ScrollRect scrollRect;
 
     protected override void Awake()
     {
         base.Awake();
         layoutGroup = GetComponent<GridLayoutGroup>();
-        spacing = layoutGroup.spacing.y;
+        spacingX = layoutGroup.spacing.x;
+        spacingY = layoutGroup.spacing.y;
+        top = layoutGroup.padding.top;
         bottom = layoutGroup.padding.bottom;
     }
 }
