@@ -27,13 +27,15 @@ namespace MapEditor
                 if (i < pencilDatas.Count)
                 {
                     int index = i;
+                    var pencilData = pencilDatas[index];
                     children[i].onClick.RemoveAllListeners();
                     children[i].onClick.AddListener(() =>
                     {
-                        scrollViewManager.pencilManager.SelectPencil(pencilDatas[index].pencil);
+                        scrollViewManager.pencilManager.SelectPencil(pencilData.pencil);
                         scrollViewManager.ObjectViewOnOff(this);
                     });
-                    children[i].GetComponentInChildren<TextMeshProUGUI>().text = pencilDatas[index].pencilName;
+                    children[i].GetComponentInChildren<Image>().sprite = pencilData.pencil.sprite;
+                    children[i].GetComponentInChildren<TextMeshProUGUI>().text = pencilData.pencilName;
                 }
                 else
                 {
