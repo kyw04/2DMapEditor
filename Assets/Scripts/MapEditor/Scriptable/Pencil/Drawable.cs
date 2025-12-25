@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
+using Touch = UnityEngine.InputSystem.EnhancedTouch.Touch;
 
 namespace MapEditor.Pencil
 {
@@ -7,12 +8,10 @@ namespace MapEditor.Pencil
     {
         public GameObject defaultObj;
         public Sprite sprite;
-        public int size;
         public Color32 color;
 
-        public void Setting(int size, Color32 color)
+        public void Setting(Color32 color)
         {
-            this.size = size;
             this.color = color;
         }
         
@@ -20,7 +19,7 @@ namespace MapEditor.Pencil
         {
             if (EventSystem.current.IsPointerOverGameObject())
                 return null;
-         
+            
             float x = Mathf.Round(pos.x);
             float y = Mathf.Round(pos.y);
             pos = new Vector3(x, y, 0);

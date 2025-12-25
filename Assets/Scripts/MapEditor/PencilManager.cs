@@ -11,7 +11,10 @@ namespace MapEditor.Pencil
         private Stack<List<GameObject>> undoStack;
         private Stack<List<GameObject>> redoStack;
         private List<GameObject> undoList;
-
+        private bool isDrawing;
+        private float touchStartTime;
+        private float drawStartTime;
+        
         private void Awake()
         {
             undoStack = new Stack<List<GameObject>>();
@@ -26,22 +29,41 @@ namespace MapEditor.Pencil
 
         private void Update()
         {
-            if (Touch.activeTouches.Count > 0)
+            int touchCount = Touch.activeTouches.Count;
+            if (touchCount == 0)
             {
-                Vector3 pos = Camera.main.ScreenToWorldPoint(Touch.activeTouches[0].screenPosition);
-                var obj = pencil.Draw(pos);
-
-                if (obj != null)
+                isDrawing = true;
+                touchStartTime = 0f;
+                if (undoList.Count > 0)
                 {
-                    undoList.Add(obj);
-                    if (redoStack.Count > 0)
-                        redoStack.Clear();
+                    undoStack.Push(undoList);
+                    undoList = new List<GameObject>();
                 }
             }
-            else if (undoList.Count > 0)
+            else if (touchCount == 1)
             {
-                undoStack.Push(undoList);
-                undoList = new List<GameObject>();
+                if (touchStartTime < drawStartTime)
+                {
+                    touchStartTime += Time.deltaTime;
+                    return;
+                }
+
+                if (isDrawing)
+                {
+                    Vector3 pos = Camera.main.ScreenToWorldPoint(Touch.activeTouches[0].screenPosition);
+                    var obj = pencil.Draw(pos);
+
+                    if (obj != null)
+                    {
+                        undoList.Add(obj);
+                        if (redoStack.Count > 0)
+                            redoStack.Clear();
+                    }
+                }
+            }
+            else
+            {
+                isDrawing = false;
             }
         }
 

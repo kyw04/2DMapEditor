@@ -61,7 +61,6 @@ namespace MapEditor
         private void Update()
         {
             TouchHandleManager(Touch.activeTouches.Count);
-            
         }
 
         private void TouchHandleManager(int count)
