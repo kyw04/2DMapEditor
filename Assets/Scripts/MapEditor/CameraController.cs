@@ -8,13 +8,16 @@ namespace MapEditor
     {
         public Camera cam;
         public bool isMove;
+        public bool isZoom;
+        
+        [Space]
+        public bool lockX;
+        public bool lockY;
+        
         
         [Header("Movement")]
         public float moveSpeed = 1f;
-        public float moveSensitivity = 1f;
         public bool invert;
-        public bool lockX;
-        public bool lockY;
 
         [Header("Zoom")]
         public float zoomSpeed;
@@ -23,8 +26,7 @@ namespace MapEditor
         public float maxOrthoSize = 50f;
         
         private Transform followTarget;
-        private Vector3 targetPosition;
-        private Vector2 screenCenter;
+        private Vector2 lastTouchCenter;
         private Vector2 lastTouch0, lastTouch1;
         private float targetOrthoSize;
         private float velocity;
@@ -46,8 +48,6 @@ namespace MapEditor
             }
 
             followTarget = cam.transform;
-            targetPosition = followTarget != null ? followTarget.position : cam.transform.position;
-            screenCenter = new Vector2(Screen.width * 0.5f, Screen.height * 0.5f);
             if (cam.orthographic)
             {
                 targetOrthoSize = cam.orthographicSize;
@@ -60,51 +60,20 @@ namespace MapEditor
 
         private void Update()
         {
-            if (!isMove)
-                return;
-            
             TouchHandleManager(Touch.activeTouches.Count);
-            followTarget.position = targetPosition;
-            cam.orthographicSize = targetOrthoSize;
+            
         }
 
         private void TouchHandleManager(int count)
         {
-            
-            
             switch (count)
             {
                 case 0: hadTwoTouchesLastFrame = false; break;
-                case 1:
-                {
-                    Touch t = Touch.activeTouches[0];
-                    Vector2 cur = t.screenPosition;
-                    Ray ray = cam.ScreenPointToRay(new Vector3(cur.x, 0, cur.y));
-
-                    if (EventSystem.current.IsPointerOverGameObject())
-                        return;
-                    
-                    if (!hadTwoTouchesLastFrame)
-                    {
-                        lastTouch0 = cur;
-                        hadTwoTouchesLastFrame = true;
-                    }
-                    else
-                    {
-                        Vector2 delta = (cur - lastTouch0);
-                    
-                        float dir = invert ? 1f : -1f;
-                        Vector3 pan = ScreenDeltaToWorld(delta, dir);
-                        targetPosition += pan;
-                    }
-
-                    lastTouch0 = cur;
+                case 2:
+                    MoveAndZoom();
                     break;
-                }
-                case 2: MoveAndZoom(); break;
             }
         }
-
 
         private void MoveAndZoom()
         {
@@ -114,44 +83,55 @@ namespace MapEditor
             Vector2 cur1 = t1.screenPosition;
             Vector2 curMid = (cur0 + cur1) * 0.5f;
 
+            // Ray ray = cam.ScreenPointToRay(new Vector3(curMid.x, 0, curMid.y));
+            // if (EventSystem.current.IsPointerOverGameObject())
+            //     return;
+                    
             if (!hadTwoTouchesLastFrame)
             {
                 lastTouch0 = cur0;
                 lastTouch1 = cur1;
+                lastTouchCenter = (cur0 + cur1) * 0.5f;
                 hadTwoTouchesLastFrame = true;
             }
             else
             {
-                float prevDist = (lastTouch0 - lastTouch1).magnitude;
-                float curDist = (cur0 - cur1).magnitude;
-                float deltaDist = curDist - prevDist;
-                Vector2 prevMid = (lastTouch0 + lastTouch1) * 0.5f;
-                Vector2 midDelta = curMid - prevMid;
-                
-                if (midDelta.magnitude >= moveSensitivity)
+                float dir = invert ? 1f : -1f;
+
+                if (isMove)
                 {
-                    float dir = invert ? 1f : -1f;
-                    Vector3 pan = ScreenDeltaToWorld(midDelta, dir);
-                
-                    if (lockX) pan.x = 0f;
-                    if (lockY) pan.y = 0f;
-                    // targetPosition += pan;
+                    Vector2 prevMid = (lastTouch0 + lastTouch1) * 0.5f;
+                    Vector2 delta = curMid - prevMid;
+                    Vector3 deltaWorld = ScreenDeltaToWorld(delta, dir);
+                    if (lockX) deltaWorld.x = 0f;
+                    if (lockY) deltaWorld.y = 0f;
+                    
+                    followTarget.position += deltaWorld;
                 }
 
-                if (Mathf.Abs(deltaDist) >= zoomSensitivity)
+                if (isZoom)
                 {
-                    midDelta = (screenCenter - curMid).normalized;
-                    // Debug.Log($"curMid {curMid}, prevMid {prevMid}");
-                    // Debug.Log($"midDelta {midDelta}");
+                    float prevDis = Vector2.Distance(lastTouch0, lastTouch1);
+                    float curDis = Vector2.Distance(cur0, cur1);
+                    float delta = curDis - prevDis;
 
-                    targetPosition += ScreenDeltaToWorld(midDelta, -1);
-                    targetOrthoSize -= deltaDist * zoomSpeed;
-                    targetOrthoSize = Mathf.Clamp(targetOrthoSize, minOrthoSize, maxOrthoSize);
+                    if (Mathf.Abs(delta) >= zoomSensitivity)
+                    {
+                        Vector2 moveDelta =  curMid - lastTouchCenter;
+                        Vector3 deltaWorld = ScreenDeltaToWorld(moveDelta, dir);
+                        if (lockX) deltaWorld.x = 0f;
+                        if (lockY) deltaWorld.y = 0f;
+
+                        followTarget.position += deltaWorld;
+                        targetOrthoSize += delta * zoomSpeed * Time.deltaTime;
+                        cam.orthographicSize = Mathf.Clamp(targetOrthoSize, minOrthoSize, maxOrthoSize);
+                    }
                 }
-                
-                lastTouch0 = cur0;
-                lastTouch1 = cur1;
             }
+            
+            lastTouch0 = cur0;
+            lastTouch1 = cur1;
+            lastTouchCenter = curMid;
         }
         
         Vector3 ScreenDeltaToWorld(Vector2 deltaPixels, float dir)
