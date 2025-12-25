@@ -9758,11 +9758,10 @@ MonoBehaviour:
   cam: {fileID: 1927111301}
   isMove: 1
   isZoom: 1
-  moveSpeed: 1.5
-  moveSensitivity: 5
-  invert: 0
   lockX: 0
   lockY: 0
+  moveSpeed: 1.5
+  invert: 0
   zoomSpeed: 1.5
   zoomSensitivity: 5
   minOrthoSize: 2

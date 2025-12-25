@@ -68,10 +68,8 @@ namespace MapEditor
         {
             switch (count)
             {
-                case 0: hadTwoTouchesLastFrame = false; break;
-                case 2:
-                    MoveAndZoom();
-                    break;
+                case 0: case 1: hadTwoTouchesLastFrame = false; break;
+                case 2: MoveAndZoom(); break;
             }
         }
 
@@ -123,8 +121,9 @@ namespace MapEditor
                         if (lockY) deltaWorld.y = 0f;
 
                         followTarget.position += deltaWorld;
-                        targetOrthoSize += delta * zoomSpeed * Time.deltaTime;
-                        cam.orthographicSize = Mathf.Clamp(targetOrthoSize, minOrthoSize, maxOrthoSize);
+                        targetOrthoSize -= delta * zoomSpeed * Time.deltaTime;
+                        targetOrthoSize = Mathf.Clamp(targetOrthoSize, minOrthoSize, maxOrthoSize);
+                        cam.orthographicSize = targetOrthoSize;
                     }
                 }
             }
