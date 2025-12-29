@@ -1,8 +1,10 @@
 using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GalleryToStorage : MonoBehaviour
 {
+    public Image obj;
     public void PickAndSave()
     {
         NativeGallery.GetImageFromGallery((path) =>
@@ -24,7 +26,7 @@ public class GalleryToStorage : MonoBehaviour
             string storedName = ImageStorageManager.Instance.SaveTexture(tex, "player_image_" + DateTime.Now.ToString("yyyyMMdd_HHmmss"));
             // 즉시 게임에 생성
             Sprite sp = Sprite.Create(tex, new Rect(0, 0, tex.width, tex.height), Vector2.one * 0.5f);
-
+            obj.sprite = sp;
         }, "Select an image");
     }
 

@@ -2,6 +2,7 @@ using System;
 using System.IO;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 [Serializable]
 public class ImageMeta
@@ -15,6 +16,7 @@ public class ImageMeta
 public class ImageStorageManager : MonoBehaviour
 {
     public static ImageStorageManager Instance { get; private set; }
+    public TextMeshProUGUI text;
 
     void Awake()
     {
@@ -48,7 +50,7 @@ public class ImageStorageManager : MonoBehaviour
         string ext = useJpg ? ".jpg" : ".png";
         string safeName = MakeSafeFileName(baseName) + ext;
         string path = GetImagePath(safeName);
-        Debug.Log(path);
+        text.text = path;
         byte[] bytes = useJpg ? toSave.EncodeToJPG(jpgQuality) : toSave.EncodeToPNG();
         File.WriteAllBytes(path, bytes);
 
