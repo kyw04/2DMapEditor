@@ -6,6 +6,8 @@ namespace MapEditor
 {
     public class CameraController : MonoBehaviour
     {
+        public static CameraController Instance { get; private set; }
+        
         public Camera cam;
         public bool isMove;
         public bool isZoom;
@@ -39,6 +41,14 @@ namespace MapEditor
 
         private void Start()
         {
+            if (Instance != null)
+            {
+                Destroy(gameObject);
+                return;
+            }
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+            
             if (cam == null) cam = Camera.main;
             if (cam == null)
             {
@@ -68,16 +78,19 @@ namespace MapEditor
             switch (count)
             {
                 case 0: case 1: hadTwoTouchesLastFrame = false; break;
-                case 2: MoveAndZoom(); break;
+                case 2: 
+                    Touch t0 = Touch.activeTouches[0];
+                    Touch t1 = Touch.activeTouches[1];
+                    Vector2 cur0 = t0.screenPosition;
+                    Vector2 cur1 = t1.screenPosition;
+                    
+                    MoveAndZoom(cur0, cur1); 
+                    break;
             }
         }
 
-        private void MoveAndZoom()
+        private void MoveAndZoom(Vector2 cur0, Vector2 cur1)
         {
-            Touch t0 = Touch.activeTouches[0];
-            Touch t1 = Touch.activeTouches[1];
-            Vector2 cur0 = t0.screenPosition;
-            Vector2 cur1 = t1.screenPosition;
             Vector2 curMid = (cur0 + cur1) * 0.5f;
 
             // Ray ray = cam.ScreenPointToRay(new Vector3(curMid.x, 0, curMid.y));
@@ -132,7 +145,7 @@ namespace MapEditor
             lastTouchCenter = curMid;
         }
         
-        Vector3 ScreenDeltaToWorld(Vector2 deltaPixels, float dir)
+        public Vector3 ScreenDeltaToWorld(Vector2 deltaPixels, float dir)
         {
             float screenHeight = Mathf.Max(1f, Screen.height);
             Vector3 right = followTarget.right;

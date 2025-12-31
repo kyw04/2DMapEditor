@@ -1,11 +1,16 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem.EnhancedTouch;
 using Touch = UnityEngine.InputSystem.EnhancedTouch.Touch;
+
+using TMPro;
 
 namespace MapEditor.Pencil
 {
     public class PencilManager : MonoBehaviour
     {
+        public TextMeshProUGUI testText;
+        
         public Drawable pencil;
         
         private Stack<List<GameObject>> undoStack;
@@ -15,11 +20,18 @@ namespace MapEditor.Pencil
         private float touchStartTime;
         private float drawStartTime;
         
-        private void Awake()
+        private void Awake() 
         {
             undoStack = new Stack<List<GameObject>>();
             redoStack = new Stack<List<GameObject>>();
             undoList = new List<GameObject>();
+            
+            EnhancedTouchSupport.Enable();
+        }
+
+        private void OnDisable()
+        {
+            EnhancedTouchSupport.Disable();
         }
 
         private void Start()
@@ -30,6 +42,7 @@ namespace MapEditor.Pencil
         private void Update()
         {
             int touchCount = Touch.activeTouches.Count;
+            testText.text = touchCount.ToString();
             if (touchCount == 0)
             {
                 isDrawing = true;
