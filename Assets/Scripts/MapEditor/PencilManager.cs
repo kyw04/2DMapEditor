@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem.EnhancedTouch;
 using Touch = UnityEngine.InputSystem.EnhancedTouch.Touch;
 
 using TMPro;
@@ -35,13 +34,6 @@ namespace MapEditor.Pencil
             undoStack = new Stack<List<GameObject>>();
             redoStack = new Stack<List<GameObject>>();
             undoList = new List<GameObject>();
-            
-            EnhancedTouchSupport.Enable();
-        }
-
-        private void OnDisable()
-        {
-            EnhancedTouchSupport.Disable();
         }
 
         private void Start()

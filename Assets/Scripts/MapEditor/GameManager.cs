@@ -1,14 +1,11 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.EnhancedTouch;
 
 namespace MapEditor
 {
     public class GameManager : MonoBehaviour
     {
         public static GameManager Instance { get; private set; }
-
-        public PlayerInput input;
-        public InputAction Touch { get; private set; }
 
         private void Awake()
         {
@@ -20,8 +17,15 @@ namespace MapEditor
             
             Instance = this;
             DontDestroyOnLoad(gameObject);
-            
-            Touch = input.actions["Touch"];
+
+            EnhancedTouchSupport.Enable();
         }
+        
+        
+        private void OnDisable()
+        {
+            EnhancedTouchSupport.Disable();
+        }
+
     }
 }
