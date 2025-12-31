@@ -17,6 +17,7 @@ namespace MapEditor
             public Drawable pencil;
         }
 
+        public Sprite titleImage;
         public List<PencilData> pencilDatas;
 
         public void ButtonSetting(ScrollViewManager scrollViewManager)

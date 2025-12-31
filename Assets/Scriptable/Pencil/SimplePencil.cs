@@ -1,11 +1,11 @@
 using UnityEngine;
 
-
 namespace MapEditor.Pencil
 {
     [CreateAssetMenu(menuName = "ScriptableObjects/Pencil", fileName = "Pencil", order = 1)]
     public class SimplePencil : Drawable
     {
+        public override void Begin() { }
         public override void End() { }
 
         protected override GameObject CreateRender(Vector3 pos)

@@ -16,6 +16,8 @@ namespace MapEditor.Pencil
         private Stack<List<GameObject>> redoStack;
         private List<GameObject> undoList;
         private bool isDrawReady;
+        private bool isBegin;
+        private bool isEnd;
         private float touchStartTime;
         private float drawStartTime;
         
@@ -44,8 +46,13 @@ namespace MapEditor.Pencil
             int touchCount = Touch.activeTouches.Count;
             if (touchCount == 0)
             {
-                pencil.End();
+                if (isEnd)
+                {
+                    pencil.End();
+                    isEnd = false;
+                }
                 isDrawReady = true;
+                isBegin = true;
                 touchStartTime = 0f;
                 
                 if (undoList.Count > 0)
@@ -61,9 +68,16 @@ namespace MapEditor.Pencil
                     touchStartTime += Time.deltaTime;
                     return;
                 }
-
+                
                 if (isDrawReady)
                 {
+                    if (isBegin)
+                    {
+                        pencil.Begin();
+                        isBegin = false;
+                        isEnd = true;
+                    }
+                    
                     var obj = pencil.Draw(Touch.activeTouches[0].screenPosition);
 
                     if (obj != null)
@@ -112,6 +126,7 @@ namespace MapEditor.Pencil
 
         public void SelectPencil(Drawable pen)
         {
+            isDrawReady = false;
             pencil = pen;
         }
     }

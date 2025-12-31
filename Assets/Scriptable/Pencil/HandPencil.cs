@@ -9,19 +9,17 @@ namespace MapEditor
 
         public override GameObject Draw(Vector3 pos)
         {
+            if (lastPos == Vector3.zero)
+                lastPos = pos;
+            
             return CreateRender(pos);
         }
-        
-        public override void End()
-        {
-            lastPos = Vector3.zero;
-        }
+
+        public override void Begin() { lastPos = Vector3.zero; }
+        public override void End() { }
 
         protected override GameObject CreateRender(Vector3 pos)
         {
-            if (lastPos == Vector3.zero)
-                lastPos = pos;
-                
             float dir = CameraController.Instance.invert ? 1f : -1f;
             Vector2 newPos = pos - lastPos;
 

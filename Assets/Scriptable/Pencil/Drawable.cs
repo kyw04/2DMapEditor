@@ -24,7 +24,8 @@ namespace MapEditor.Pencil
             
             return CreateRender(pos);
         }
-        
+
+        public abstract void Begin();
         public abstract void End();
         protected abstract GameObject CreateRender(Vector3 pos);
         protected abstract GameObject ChangeRender(Vector3 pos);
