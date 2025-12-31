@@ -9,6 +9,8 @@ namespace MapEditor.Pencil
 {
     public class PencilManager : MonoBehaviour
     {
+        public static PencilManager Instance { get; private set; }
+        
         public TextMeshProUGUI testText;
         
         public Drawable pencil;
@@ -16,12 +18,20 @@ namespace MapEditor.Pencil
         private Stack<List<GameObject>> undoStack;
         private Stack<List<GameObject>> redoStack;
         private List<GameObject> undoList;
-        private bool isDrawing;
+        private bool isDrawReady;
         private float touchStartTime;
         private float drawStartTime;
         
         private void Awake() 
         {
+            if (Instance != null)
+            {
+                Destroy(gameObject);
+                return;
+            }
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+            
             undoStack = new Stack<List<GameObject>>();
             redoStack = new Stack<List<GameObject>>();
             undoList = new List<GameObject>();
@@ -45,8 +55,10 @@ namespace MapEditor.Pencil
             testText.text = touchCount.ToString();
             if (touchCount == 0)
             {
-                isDrawing = true;
+                pencil.End();
+                isDrawReady = true;
                 touchStartTime = 0f;
+                
                 if (undoList.Count > 0)
                 {
                     undoStack.Push(undoList);
@@ -61,10 +73,9 @@ namespace MapEditor.Pencil
                     return;
                 }
 
-                if (isDrawing)
+                if (isDrawReady)
                 {
-                    Vector3 pos = Camera.main.ScreenToWorldPoint(Touch.activeTouches[0].screenPosition);
-                    var obj = pencil.Draw(pos);
+                    var obj = pencil.Draw(Touch.activeTouches[0].screenPosition);
 
                     if (obj != null)
                     {
@@ -76,7 +87,7 @@ namespace MapEditor.Pencil
             }
             else
             {
-                isDrawing = false;
+                isDrawReady = false;
             }
         }
 

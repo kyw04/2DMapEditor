@@ -17,3 +17,4 @@ MonoBehaviour:
   color:
     serializedVersion: 2
     rgba: 0
+  moveSpeed: 1

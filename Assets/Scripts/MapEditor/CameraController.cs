@@ -101,7 +101,7 @@ namespace MapEditor
             {
                 lastTouch0 = cur0;
                 lastTouch1 = cur1;
-                lastTouchCenter = (cur0 + cur1) * 0.5f;
+                lastTouchCenter = curMid;
                 hadTwoTouchesLastFrame = true;
             }
             else
@@ -112,11 +112,7 @@ namespace MapEditor
                 {
                     Vector2 prevMid = (lastTouch0 + lastTouch1) * 0.5f;
                     Vector2 delta = curMid - prevMid;
-                    Vector3 deltaWorld = ScreenDeltaToWorld(delta, dir);
-                    if (lockX) deltaWorld.x = 0f;
-                    if (lockY) deltaWorld.y = 0f;
-                    
-                    followTarget.position += deltaWorld;
+                    Move(delta, dir);
                 }
 
                 if (isZoom)
@@ -127,12 +123,9 @@ namespace MapEditor
 
                     if (Mathf.Abs(delta) >= zoomSensitivity)
                     {
-                        Vector2 moveDelta =  curMid - lastTouchCenter;
-                        Vector3 deltaWorld = ScreenDeltaToWorld(moveDelta, dir);
-                        if (lockX) deltaWorld.x = 0f;
-                        if (lockY) deltaWorld.y = 0f;
-
-                        followTarget.position += deltaWorld;
+                        Vector2 moveDelta = curMid - lastTouchCenter;
+                        Move(moveDelta, dir);
+                        
                         targetOrthoSize -= delta * zoomSpeed * Time.deltaTime;
                         targetOrthoSize = Mathf.Clamp(targetOrthoSize, minOrthoSize, maxOrthoSize);
                         cam.orthographicSize = targetOrthoSize;
@@ -143,6 +136,15 @@ namespace MapEditor
             lastTouch0 = cur0;
             lastTouch1 = cur1;
             lastTouchCenter = curMid;
+        }
+
+        public void Move(Vector2 delta, float dir)
+        {
+            Vector3 deltaWorld = ScreenDeltaToWorld(delta, dir);
+            if (lockX) deltaWorld.x = 0f;
+            if (lockY) deltaWorld.y = 0f;
+            
+            followTarget.position += deltaWorld;
         }
         
         public Vector3 ScreenDeltaToWorld(Vector2 deltaPixels, float dir)
