@@ -4976,7 +4976,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8590812249bfcf644bb52a3233862e37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ImageStorageManager
-  text: {fileID: 0}
+  text: {fileID: 456293129}
 --- !u!1 &956700679
 GameObject:
   m_ObjectHideFlags: 0

@@ -10,8 +10,6 @@ namespace MapEditor.Pencil
     {
         public static PencilManager Instance { get; private set; }
         
-        public TextMeshProUGUI testText;
-        
         public Drawable pencil;
         
         private Stack<List<GameObject>> undoStack;
@@ -44,7 +42,6 @@ namespace MapEditor.Pencil
         private void Update()
         {
             int touchCount = Touch.activeTouches.Count;
-            testText.text = touchCount.ToString();
             if (touchCount == 0)
             {
                 pencil.End();
