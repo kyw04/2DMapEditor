@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using Touch = UnityEngine.InputSystem.EnhancedTouch.Touch;
 
 namespace MapEditor.Pencil
@@ -8,6 +9,7 @@ namespace MapEditor.Pencil
     {
         public static PencilManager Instance { get; private set; }
 
+        public Image selectedPencilImage;
         public Transform map;
         public Drawable pencil;
         
@@ -128,6 +130,7 @@ namespace MapEditor.Pencil
         {
             isDrawReady = false;
             pencil = pen;
+            selectedPencilImage.sprite = pen.data.sprite;
         }
         
         public void SelectPencil(Drawable pen, DrawableData data)

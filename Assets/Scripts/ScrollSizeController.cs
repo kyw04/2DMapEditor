@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(RectTransform))]
@@ -10,7 +11,8 @@ public abstract class ScrollSizeController : MonoBehaviour
     protected float bottom;
 
     private bool onFirst;
-
+    private Coroutine coroutine;
+    
     protected virtual void Awake()
     {
         target = GetComponent<RectTransform>();
@@ -18,16 +20,19 @@ public abstract class ScrollSizeController : MonoBehaviour
 
     private void Start()
     {
+        coroutine = null;
         SetHeight();
     }
 
-    public void SetHeight()
+    private IEnumerator StartSetHeight()
     {
+        yield return new WaitForSeconds(Time.deltaTime);
+        
         var children = transform.GetComponentsInChildren<RectTransform>();
         float totalHeight = 0f, childWidth = 0f;
         int widthCount = 0, stack = 0;
         onFirst = true;
-
+        
         foreach (var t in children)
         {
             if (t.transform.parent != transform)
@@ -54,5 +59,11 @@ public abstract class ScrollSizeController : MonoBehaviour
         totalHeight += bottom + top;
         
         target.sizeDelta = new Vector2(target.rect.x, totalHeight);
+        coroutine = null;
+    }
+    
+    public void SetHeight()
+    {
+        coroutine ??= StartCoroutine(StartSetHeight());
     }
 }

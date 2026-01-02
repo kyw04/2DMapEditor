@@ -39,8 +39,8 @@ namespace MapEditor
             }
             else
             {
-                data.ButtonSetting(this);
                 objectView.SetActive(true);
+                data.ButtonSetting(this);
                 sizeController.SetHeight();
             }
 
