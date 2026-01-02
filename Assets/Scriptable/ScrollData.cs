@@ -34,7 +34,6 @@ namespace MapEditor
             {
                 pencilDatas.Clear();
                 var datas = pencilList.CreateDrawableData();
-                Debug.Log(datas.Count);
                 for (int i = 0; i < datas.Count; i++)
                 {
                     PencilData pencilData = new PencilData(pencilList.sprites[i].name, datas[i]);

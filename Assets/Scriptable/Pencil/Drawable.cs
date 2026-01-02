@@ -11,19 +11,8 @@ namespace MapEditor.Pencil
         public GameObject defaultObj;
         public Sprite sprite;
         public bool isFloor;
-        private string path;
-        private string directoryPath;
-        
-        public DrawableData(GameObject obj, Sprite sp, bool bo, string addPath)
-        {
-            defaultObj = obj;
-            sprite = sp;
-            isFloor = bo;
-
-            
-            directoryPath = Path.Combine(Application.persistentDataPath, "Json");
-            path = Path.Combine(directoryPath, addPath + ".json");
-        }
+        public string path { get; private set; }
+        public string directoryPath { get; private set; }
 
         public DrawableData(Drawable pencil, string addPath)
         {
@@ -40,7 +29,7 @@ namespace MapEditor.Pencil
         {
             if (!File.Exists(directoryPath))
                 Directory.CreateDirectory(directoryPath);
-            
+
             File.WriteAllText(path, JsonUtility.ToJson(this, true));
             Debug.Log($"DrawableData: data saved -> {path}");
         }
@@ -80,11 +69,7 @@ namespace MapEditor.Pencil
             return CreateRender(pos);
         }
 
-        public virtual void Begin()
-        {
-            data = data.LoadData();
-        }
-
+        public abstract void Begin();
         public abstract void End();
         protected abstract GameObject CreateRender(Vector3 pos);
         protected abstract GameObject ChangeRender(Vector3 pos);

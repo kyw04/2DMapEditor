@@ -124,11 +124,18 @@ namespace MapEditor.Pencil
             }
         }
 
-        public void SelectPencil(Drawable pen, DrawableData data)
+        public void SelectPencil(Drawable pen)
         {
             isDrawReady = false;
             pencil = pen;
-            pencil.data = data.LoadData();
+        }
+        
+        public void SelectPencil(Drawable pen, DrawableData data)
+        {
+            SelectPencil(pen);
+            
+            if (data != null)
+                pencil.data = data.LoadData();
         }
     }
 }
