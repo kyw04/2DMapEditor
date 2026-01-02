@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 namespace MapEditor
 {
-    [CreateAssetMenu(menuName = "ScriptableObjects/ScrollData", fileName = "ScrollData", order = 1)]
+    [CreateAssetMenu(menuName = "ScriptableObjects/ScrollData", fileName = "ScrollData", order = 0)]
     public class ScrollData : ScriptableObject
     {
         [Serializable]
@@ -15,13 +15,31 @@ namespace MapEditor
         {
             public string pencilName;
             public Drawable pencil;
+            
+            public PencilData(string str, Drawable pen)
+            {
+                pencilName = str;
+                pencil = pen;
+            }
         }
 
         public Sprite titleImage;
+        public bool usePencilList;
+        public PencilList pencilList;
         public List<PencilData> pencilDatas;
 
         public void ButtonSetting(ScrollViewManager scrollViewManager)
         {
+            if (pencilDatas.Count == 0 && usePencilList)
+            {
+                foreach (var sprite in pencilList.sprites)
+                {
+                    pencilList.pencil.sprite = sprite;
+                    PencilData pencilData = new PencilData(sprite.name, pencilList.pencil);
+                    pencilDatas.Add(pencilData);
+                }
+            }
+            
             Button[] children = scrollViewManager.objectViewContent.GetComponentsInChildren<Button>();
             for (int i = 0; i < children.Length; i++)
             {

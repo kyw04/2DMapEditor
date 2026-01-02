@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d8d1bf503e852664abbe7b349ea6de1f, type: 3}
-  m_Name: Pencil 1
+  m_Name: Flower 1
   m_EditorClassIdentifier: Assembly-CSharp::MapEditor.Pencil.SimplePencil
   defaultObj: {fileID: 2400803431224416152, guid: 27e7f5152a53cea4dac881dec3b720f0, type: 3}
-  sprite: {fileID: -5177388603050735206, guid: 71ebafeef3c03457483266a33ab2b270, type: 3}
-  size: 1
+  sprite: {fileID: 21300174, guid: c3a40e1c46727b94e959990527f8e7fa, type: 3}
   color:
     serializedVersion: 2
     rgba: 4294967295
+  isFloor: 1

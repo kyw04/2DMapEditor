@@ -7,7 +7,7 @@ namespace MapEditor.Pencil
     {
         public GameObject defaultObj;
         public Sprite sprite;
-        public Color32 color;
+        public bool isFloor;
 
         public virtual GameObject Draw(Vector3 pos)
         {
@@ -19,7 +19,7 @@ namespace MapEditor.Pencil
             float y = Mathf.Round(pos.y);
             pos = new Vector3(x, y, 0);
             
-            if (Physics2D.Raycast(pos, Vector3.forward))
+            if (!isFloor && Physics2D.Raycast(pos, Vector3.forward))
                 return ChangeRender(pos);
             
             return CreateRender(pos);

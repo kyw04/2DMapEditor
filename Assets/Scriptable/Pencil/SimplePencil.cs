@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace MapEditor.Pencil
 {
-    [CreateAssetMenu(menuName = "ScriptableObjects/Pencil", fileName = "Pencil", order = 1)]
+    [CreateAssetMenu(menuName = "ScriptableObjects/Pencil", fileName = "Pencil", order = 2)]
     public class SimplePencil : Drawable
     {
         public override void Begin() { }
@@ -12,7 +12,6 @@ namespace MapEditor.Pencil
         {
             var render = Instantiate(defaultObj, pos, Quaternion.identity).GetComponent<SpriteRenderer>();
             render.sprite = sprite;
-            render.color = color;
 
             return render.gameObject;
         }
@@ -21,5 +20,7 @@ namespace MapEditor.Pencil
         {
             return null;
         }
+
+        
     }
 }

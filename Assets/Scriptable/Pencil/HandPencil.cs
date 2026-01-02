@@ -1,12 +1,11 @@
 using UnityEngine;
 
-namespace MapEditor
+namespace MapEditor.Pencil
 {
-    [CreateAssetMenu(menuName = "ScriptableObjects/Hand Pencil", fileName = "Pencil", order = 1)]
-    public class HandPencil : Pencil.Drawable
+    [CreateAssetMenu(menuName = "ScriptableObjects/Hand Pencil", fileName = "Pencil", order = 3)]
+    public class HandPencil : Drawable
     {
         private Vector3 lastPos;
-
         public override GameObject Draw(Vector3 pos)
         {
             if (lastPos == Vector3.zero)
@@ -33,5 +32,7 @@ namespace MapEditor
         {
             return CreateRender(pos);
         }
+
+        
     }
 }
