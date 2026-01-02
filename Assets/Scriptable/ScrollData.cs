@@ -26,7 +26,7 @@ namespace MapEditor
         public Sprite titleImage;
         public bool usePencilList;
         public PencilList pencilList;
-        public List<PencilData> pencilDatas;
+        private List<PencilData> pencilDatas;
 
         public void ButtonSetting(ScrollViewManager scrollViewManager)
         {

@@ -18,8 +18,7 @@ public class PencilList : ScriptableObject
         
         foreach (var sprite in sprites)
         {
-            pencil.data.sprite = sprite;
-            DrawableData data = new DrawableData(pencil, sprite.name);
+            DrawableData data = new DrawableData(pencil, sprite.name) { sprite = sprite };
             data.SaveData();
             datas.Add(data);
         }

@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -21,7 +22,7 @@ namespace MapEditor.Pencil
         private bool isEnd;
         private float touchStartTime;
         private float drawStartTime;
-        
+
         private void Awake() 
         {
             if (Instance != null)
@@ -136,9 +137,8 @@ namespace MapEditor.Pencil
         public void SelectPencil(Drawable pen, DrawableData data)
         {
             SelectPencil(pen);
-            
-            if (data != null)
-                pencil.data = data.LoadData();
+            pen.data = data.LoadData();
+            selectedPencilImage.sprite = pen.data.sprite;
         }
     }
 }

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef9f8521497108c4cbb0c1596fc533b4, type: 3}
   m_Name: Tileset Wall Pencil List
   m_EditorClassIdentifier: Assembly-CSharp::PencilList
-  pencil: {fileID: 11400000, guid: b711c8d9701ed134ebecde7742679a0a, type: 2}
+  pencil: {fileID: 11400000, guid: 4e1f809ab70a3fc4baa87a6ef10672fe, type: 2}
   sprites:
   - {fileID: 21300002, guid: 9f8f114589864b6489859a58fbb6baf9, type: 3}
   - {fileID: 21300004, guid: 9f8f114589864b6489859a58fbb6baf9, type: 3}

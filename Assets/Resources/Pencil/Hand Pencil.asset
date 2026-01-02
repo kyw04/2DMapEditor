@@ -12,3 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f67d159c6d1755448b27a1b4eecc9cf2, type: 3}
   m_Name: Hand Pencil
   m_EditorClassIdentifier: Assembly-CSharp::MapEditor.Pencil.HandPencil
+  data:
+    defaultObj: {fileID: 0}
+    sprite: {fileID: 21300000, guid: aeb6d48d623715c43827e8ad4584b3a6, type: 3}
+    isOverlap: 0

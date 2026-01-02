@@ -10,7 +10,6 @@ namespace MapEditor.Pencil
     {
         public GameObject defaultObj;
         public Sprite sprite;
-        public bool isFloor;
         public string path { get; private set; }
         public string directoryPath { get; private set; }
 
@@ -19,7 +18,6 @@ namespace MapEditor.Pencil
             DrawableData penData = pencil.data;
             defaultObj = penData.defaultObj;
             sprite = penData.sprite;
-            isFloor = penData.isFloor;
             
             directoryPath = Path.Combine(Application.persistentDataPath, "Json");
             path = Path.Combine(directoryPath, addPath + ".json");
@@ -50,6 +48,7 @@ namespace MapEditor.Pencil
     public abstract class Drawable : ScriptableObject
     {
         public DrawableData data;
+        public bool isOverlap;
 
         public virtual GameObject Draw(Vector3 pos)
         {
@@ -59,10 +58,16 @@ namespace MapEditor.Pencil
             pos = Camera.main.ScreenToWorldPoint(pos);
             float x = Mathf.Round(pos.x);
             float y = Mathf.Round(pos.y);
-            pos = new Vector3(x, y, 1);
-            
-            if (!data.isFloor && Physics2D.Raycast(pos, Vector3.forward))
+            pos = new Vector3(x, y, 0);
+
+            RaycastHit2D hit = Physics2D.Raycast(pos, Vector3.forward);
+            if (hit)
+            {
+                if (isOverlap && hit.transform.GetComponent<SpriteRenderer>()?.sprite != data.sprite)
+                    return CreateRender(pos);
+                
                 return ChangeRender(pos);
+            }
             
             return CreateRender(pos);
         }
