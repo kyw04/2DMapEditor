@@ -1,6 +1,5 @@
 using MapEditor.Pencil;
 using UnityEngine;
-using TMPro;
 
 namespace MapEditor
 {
