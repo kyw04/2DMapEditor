@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace MapEditor.Pencil
 {
-    [CreateAssetMenu(menuName = "ScriptableObjects/Hand Pencil", fileName = "Pencil", order = 3)]
+    [CreateAssetMenu(menuName = "ScriptableObjects/Hand Pencil", fileName = "Hand Pencil", order = 3)]
     public class HandPencil : Drawable
     {
         private Vector3 lastPos;

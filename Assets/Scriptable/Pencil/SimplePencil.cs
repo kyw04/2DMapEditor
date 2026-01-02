@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace MapEditor.Pencil
 {
-    [CreateAssetMenu(menuName = "ScriptableObjects/Pencil", fileName = "Pencil", order = 2)]
+    [CreateAssetMenu(menuName = "ScriptableObjects/Pencil", fileName = "Simple Pencil", order = 2)]
     public class SimplePencil : Drawable
     {
         public override void Begin() { }

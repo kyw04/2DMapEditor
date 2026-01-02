@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 namespace MapEditor
 {
-    [CreateAssetMenu(menuName = "ScriptableObjects/ScrollData", fileName = "ScrollData", order = 0)]
+    [CreateAssetMenu(menuName = "ScriptableObjects/ScrollData", fileName = "Scroll Data", order = 0)]
     public class ScrollData : ScriptableObject
     {
         [Serializable]
@@ -41,25 +41,27 @@ namespace MapEditor
                 }
             }
             
-            Button[] children = scrollViewManager.objectViewContent.GetComponentsInChildren<Button>();
+            Button[] children = scrollViewManager.objectViewContent.GetComponentsInChildren<Button>(true);
             for (int i = 0; i < children.Length; i++)
             {
+                var button = children[i];
                 if (i < pencilDatas.Count)
                 {
                     int index = i;
                     var pencilData = pencilDatas[index];
-                    children[i].onClick.RemoveAllListeners();
-                    children[i].onClick.AddListener(() =>
+                    button.onClick.RemoveAllListeners();
+                    button.onClick.AddListener(() =>
                     {
                         scrollViewManager.pencilManager.SelectPencil(pencilList.pencil, pencilData.data);
                         scrollViewManager.ObjectViewOnOff(this);
                     });
-                    children[i].GetComponentInChildren<Image>().sprite = pencilData.data.sprite;
-                    children[i].GetComponentInChildren<TextMeshProUGUI>().text = pencilData.pencilName;
+                    button.GetComponentInChildren<Image>().sprite = pencilData.data.sprite;
+                    button.GetComponentInChildren<TextMeshProUGUI>().text = pencilData.pencilName;
+                    button.gameObject.SetActive(true);
                 }
                 else
                 {
-                    children[i].gameObject.SetActive(false);
+                    button.gameObject.SetActive(false);
                 }
             }
         }

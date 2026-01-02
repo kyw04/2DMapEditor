@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ef9f8521497108c4cbb0c1596fc533b4, type: 3}
-  m_Name: PlantPencilList
+  m_Name: Plant Pencil List
   m_EditorClassIdentifier: Assembly-CSharp::PencilList
   pencil: {fileID: 11400000, guid: 8bca6c8ff4cd45c47b8913b42a2def4a, type: 2}
   sprites:

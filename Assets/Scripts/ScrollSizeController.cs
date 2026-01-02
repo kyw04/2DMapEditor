@@ -23,21 +23,21 @@ public abstract class ScrollSizeController : MonoBehaviour
 
     public void SetHeight()
     {
-        var children = transform.GetComponentsInChildren<RectTransform>(true);
-        float totalHeight = 0f, childrenWidth = 0f;
+        var children = transform.GetComponentsInChildren<RectTransform>();
+        float totalHeight = 0f, childWidth = 0f;
         int widthCount = 0, stack = 0;
         onFirst = true;
-        
+
         foreach (var t in children)
         {
             if (t.transform.parent != transform)
                 continue;
-            childrenWidth = t.rect.width;
+            childWidth = t.rect.width;
 
             if (onFirst)
             {
                 onFirst = false;
-                stack = (int)(children[0].rect.width / (childrenWidth + spacingX));
+                stack = (int)(children[0].rect.width / (childWidth + spacingX));
                 if (stack <= 0)
                     stack = 1;
             }
@@ -50,7 +50,7 @@ public abstract class ScrollSizeController : MonoBehaviour
         }
 
         if (0 < widthCount)
-            totalHeight += childrenWidth;
+            totalHeight += childWidth;
         totalHeight += bottom + top;
         
         target.sizeDelta = new Vector2(target.rect.x, totalHeight);

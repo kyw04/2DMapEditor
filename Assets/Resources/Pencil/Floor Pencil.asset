@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d8d1bf503e852664abbe7b349ea6de1f, type: 3}
-  m_Name: FloorPencil
+  m_Name: Floor Pencil
   m_EditorClassIdentifier: Assembly-CSharp::MapEditor.Pencil.SimplePencil
   data:
     defaultObj: {fileID: 2400803431224416152, guid: 27e7f5152a53cea4dac881dec3b720f0, type: 3}

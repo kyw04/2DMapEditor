@@ -31,7 +31,7 @@ namespace MapEditor.Pencil
                 Directory.CreateDirectory(directoryPath);
 
             File.WriteAllText(path, JsonUtility.ToJson(this, true));
-            Debug.Log($"DrawableData: data saved -> {path}");
+            // Debug.Log($"DrawableData: data saved -> {path}");
         }
 
         public DrawableData LoadData()
@@ -43,7 +43,7 @@ namespace MapEditor.Pencil
             }
             
             Debug.LogWarning("DrawableData: could not find data path.");
-            return null;
+            return this;
         }
     }
     
@@ -51,8 +51,6 @@ namespace MapEditor.Pencil
     {
         public DrawableData data;
 
-        public Sprite GetSprite() { return data.sprite; }
-        
         public virtual GameObject Draw(Vector3 pos)
         {
             if (EventSystem.current.IsPointerOverGameObject())
@@ -61,7 +59,7 @@ namespace MapEditor.Pencil
             pos = Camera.main.ScreenToWorldPoint(pos);
             float x = Mathf.Round(pos.x);
             float y = Mathf.Round(pos.y);
-            pos = new Vector3(x, y, 0);
+            pos = new Vector3(x, y, 1);
             
             if (!data.isFloor && Physics2D.Raycast(pos, Vector3.forward))
                 return ChangeRender(pos);
