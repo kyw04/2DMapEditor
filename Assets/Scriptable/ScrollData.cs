@@ -32,7 +32,11 @@ namespace MapEditor
         {
             if (usePencilList)
             {
-                pencilDatas.Clear();
+                if (pencilDatas == null)
+                    pencilDatas = new List<PencilData>();
+                else
+                    pencilDatas.Clear();
+                
                 var datas = pencilList.CreateDrawableData();
                 for (int i = 0; i < datas.Count; i++)
                 {
@@ -40,7 +44,6 @@ namespace MapEditor
                     pencilDatas.Add(pencilData);
                 }
             }
-            
             Button[] children = scrollViewManager.objectViewContent.GetComponentsInChildren<Button>(true);
             for (int i = 0; i < children.Length; i++)
             {
