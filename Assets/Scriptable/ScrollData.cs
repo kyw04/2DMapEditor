@@ -14,12 +14,12 @@ namespace MapEditor
         public struct PencilData
         {
             public string pencilName;
-            public Drawable pencil;
+            public DrawableData data;
             
-            public PencilData(string str, Drawable pen)
+            public PencilData(string str, DrawableData pen)
             {
                 pencilName = str;
-                pencil = pen;
+                data = pen;
             }
         }
 
@@ -30,12 +30,14 @@ namespace MapEditor
 
         public void ButtonSetting(ScrollViewManager scrollViewManager)
         {
-            if (pencilDatas.Count == 0 && usePencilList)
+            if (usePencilList)
             {
-                foreach (var sprite in pencilList.sprites)
+                pencilDatas.Clear();
+                var datas = pencilList.CreateDrawableData();
+                Debug.Log(datas.Count);
+                for (int i = 0; i < datas.Count; i++)
                 {
-                    pencilList.pencil.sprite = sprite;
-                    PencilData pencilData = new PencilData(sprite.name, pencilList.pencil);
+                    PencilData pencilData = new PencilData(pencilList.sprites[i].name, datas[i]);
                     pencilDatas.Add(pencilData);
                 }
             }
@@ -50,10 +52,10 @@ namespace MapEditor
                     children[i].onClick.RemoveAllListeners();
                     children[i].onClick.AddListener(() =>
                     {
-                        scrollViewManager.pencilManager.SelectPencil(pencilData.pencil);
+                        scrollViewManager.pencilManager.SelectPencil(pencilList.pencil, pencilData.data);
                         scrollViewManager.ObjectViewOnOff(this);
                     });
-                    children[i].GetComponentInChildren<Image>().sprite = pencilData.pencil.sprite;
+                    children[i].GetComponentInChildren<Image>().sprite = pencilData.data.sprite;
                     children[i].GetComponentInChildren<TextMeshProUGUI>().text = pencilData.pencilName;
                 }
                 else

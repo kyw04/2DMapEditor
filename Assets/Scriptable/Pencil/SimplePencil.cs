@@ -10,8 +10,8 @@ namespace MapEditor.Pencil
 
         protected override GameObject CreateRender(Vector3 pos)
         {
-            var render = Instantiate(defaultObj, pos, Quaternion.identity).GetComponent<SpriteRenderer>();
-            render.sprite = sprite;
+            var render = Instantiate(data.defaultObj, pos, Quaternion.identity).GetComponent<SpriteRenderer>();
+            render.sprite = data.sprite;
 
             return render.gameObject;
         }

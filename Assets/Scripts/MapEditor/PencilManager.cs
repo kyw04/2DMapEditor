@@ -2,8 +2,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using Touch = UnityEngine.InputSystem.EnhancedTouch.Touch;
 
-using TMPro;
-
 namespace MapEditor.Pencil
 {
     public class PencilManager : MonoBehaviour
@@ -39,7 +37,7 @@ namespace MapEditor.Pencil
 
         private void Start()
         {
-            SelectPencil(pencil);
+            SelectPencil(pencil, pencil.data);
         }
 
         private void Update()
@@ -126,10 +124,11 @@ namespace MapEditor.Pencil
             }
         }
 
-        public void SelectPencil(Drawable pen)
+        public void SelectPencil(Drawable pen, DrawableData data)
         {
             isDrawReady = false;
             pencil = pen;
+            pencil.data = data.LoadData();
         }
     }
 }

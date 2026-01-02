@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c3a081345edfd6940aae802249ae46a1, type: 3}
-  m_Name: Bush
+  m_Name: Plant
   m_EditorClassIdentifier: Assembly-CSharp::MapEditor.ScrollData
   titleImage: {fileID: 0}
   usePencilList: 1
-  pencilList: {fileID: 11400000, guid: 0b6859dc4c94bb342a8eed7afadb860c, type: 2}
+  pencilList: {fileID: 11400000, guid: f730e2b6f094e2848bb287541d58f9b4, type: 2}
   pencilDatas: []
