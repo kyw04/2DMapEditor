@@ -9,7 +9,8 @@ namespace MapEditor.Pencil
     public class PencilManager : MonoBehaviour
     {
         public static PencilManager Instance { get; private set; }
-        
+
+        public Transform map;
         public Drawable pencil;
         
         private Stack<List<GameObject>> undoStack;
@@ -82,6 +83,7 @@ namespace MapEditor.Pencil
 
                     if (obj != null)
                     {
+                        obj.transform.SetParent(map);
                         undoList.Add(obj);
                         if (redoStack.Count > 0)
                             redoStack.Clear();
