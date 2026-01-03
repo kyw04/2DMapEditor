@@ -10,7 +10,6 @@ namespace MapEditor.Pencil
         public static PencilManager Instance { get; private set; }
 
         public Image selectedPencilImage;
-        public Transform map;
         public Drawable pencil;
         
         private Stack<List<GameObject>> undoStack;
@@ -83,7 +82,11 @@ namespace MapEditor.Pencil
 
                     if (obj != null)
                     {
-                        obj.transform.SetParent(map);
+                        var objTrans = obj.transform;
+                        var penData = pencil.data;
+                        objTrans.SetParent(GameManager.Instance.mapParent);
+                        GameManager.Instance.mapList.dataList.Add(new MapData(objTrans.position, penData.sprite, penData.defaultObj));
+                        
                         undoList.Add(obj);
                         if (redoStack.Count > 0)
                             redoStack.Clear();
