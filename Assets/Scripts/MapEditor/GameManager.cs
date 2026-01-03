@@ -12,15 +12,15 @@ namespace MapEditor
     public class MapData
     {
         public float x, y;
-        public GameObject obj;
         public Sprite sprite;
+        public GameObject defaultObj;
 
-        public MapData(Vector2 pos, Sprite sprite, GameObject obj)
+        public MapData(Vector2 pos, Sprite sprite, GameObject defaultObj)
         {
             this.x = pos.x;
             this.y = pos.y;
             this.sprite = sprite;
-            this.obj = obj;
+            this.defaultObj = defaultObj;
         }
     }
     [Serializable]
@@ -89,7 +89,7 @@ namespace MapEditor
             mapSaveBackground.SetActive(true);
             foreach (var data in mapList.dataList)
             {
-                 var render = Instantiate(data.obj, new Vector3(data.x, data.y), quaternion.identity).GetComponent<SpriteRenderer>();
+                 var render = Instantiate(data.defaultObj, new Vector3(data.x, data.y), quaternion.identity).GetComponent<SpriteRenderer>();
                  render.sprite = data.sprite;
             }
             yield return new WaitForEndOfFrame();

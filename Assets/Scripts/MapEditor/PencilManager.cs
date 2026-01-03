@@ -85,7 +85,8 @@ namespace MapEditor.Pencil
                         var objTrans = obj.transform;
                         var penData = pencil.data;
                         objTrans.SetParent(GameManager.Instance.mapParent);
-                        GameManager.Instance.mapList.dataList.Add(new MapData(objTrans.position, penData.sprite, penData.defaultObj));
+                        var data = new MapData(objTrans.position, penData.sprite, penData.defaultObj);
+                        GameManager.Instance.mapList.dataList.Add(data);
                         
                         undoList.Add(obj);
                         if (redoStack.Count > 0)
