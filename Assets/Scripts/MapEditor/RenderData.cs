@@ -18,10 +18,18 @@ public class RenderData : MonoBehaviour
         mapData = new MapData(worldObj, pos, sprite, defaultObj);
     }
 
-    public void ChangeSprite(Sprite sprite)
+    public void ChangeMapData(MapData data)
     {
-        mapData.sprite = sprite;
-        renderer.sprite = sprite;
+        if (mapData == data)
+            return;
+        
+        if (data.isActivate)
+            Activate();
+        else
+            Disable();
+
+        mapData = data;
+        renderer.sprite = data.sprite;
     }
     
     public void Activate()

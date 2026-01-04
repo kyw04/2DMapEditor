@@ -29,7 +29,6 @@ namespace MapEditor.Pencil
                 Directory.CreateDirectory(directoryPath);
 
             File.WriteAllText(path, JsonUtility.ToJson(this, true));
-            // Debug.Log($"DrawableData: data saved -> {path}");
         }
 
         public DrawableData LoadData()
@@ -48,7 +47,6 @@ namespace MapEditor.Pencil
     public abstract class Drawable : ScriptableObject
     {
         public DrawableData data;
-        public bool isOverlap;
 
         public virtual RenderData Draw(Vector2 pos)
         {
@@ -64,8 +62,14 @@ namespace MapEditor.Pencil
             if (hitData)
             {
                 RenderData renderData = hitData.transform.GetComponent<RenderData>();
-                if (renderData == null || renderData.mapData == null || (isOverlap && renderData.mapData.sprite != data.sprite))
+                if (data.defaultObj == null)
+                    return ChangeRender(renderData, pos);
+
+                if (renderData == null || renderData.mapData == null ||
+                    !renderData.CompareTag(data.defaultObj.tag))
+                {
                     return CreateRender(pos);
+                }
                 
                 return ChangeRender(renderData, pos);
             }

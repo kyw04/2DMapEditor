@@ -13,7 +13,7 @@ namespace MapEditor.Pencil
         public Drawable pencil;
         public float drawStartTime;
 
-        private List<RenderData> undoList;
+        private List<KeyValuePair<RenderData, MapData>> undoList;
         private bool isDrawReady;
         private bool isBegin;
         private bool isEnd;
@@ -29,7 +29,7 @@ namespace MapEditor.Pencil
             Instance = this;
             DontDestroyOnLoad(gameObject);
             
-            undoList = new List<RenderData>();
+            undoList = new List<KeyValuePair<RenderData, MapData>>();
         }
 
         private void Start()
@@ -54,7 +54,7 @@ namespace MapEditor.Pencil
                 if (undoList.Count > 0)
                 {
                     GameManager.Instance.undoStack.Push(undoList);
-                    undoList = new List<RenderData>();
+                    undoList = new List<KeyValuePair<RenderData, MapData>>();
                 }
             }
             else if (touchCount == 1)
@@ -80,7 +80,7 @@ namespace MapEditor.Pencil
                     {
                         var objTrans = obj.transform;
                         objTrans.SetParent(GameManager.Instance.mapParent);
-                        undoList.Add(obj);
+                        undoList.Add(new KeyValuePair<RenderData, MapData>(obj, obj.mapData));
                         if (GameManager.Instance.redoStack.Count > 0)
                             GameManager.Instance.redoStack.Clear();
                     }

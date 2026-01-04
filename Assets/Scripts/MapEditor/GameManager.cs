@@ -19,7 +19,7 @@ namespace MapEditor
 
         public MapData(GameObject worldObj, Vector2 pos, Sprite sprite, GameObject defaultObj)
         {
-            isActivate = false;
+            isActivate = true;
             this.worldObj = worldObj;
             this.x = pos.x;
             this.y = pos.y;
@@ -46,9 +46,9 @@ namespace MapEditor
         private Coroutine coroutine;
         private Dictionary<Vector2, List<RenderData>> mapRenders;
         
-        public Stack<List<RenderData>> undoStack { get; private set; }
-        public Stack<List<RenderData>> redoStack { get; private set; }
-        private List<RenderData> tempRenderDataList;
+        public Stack<List<KeyValuePair<RenderData, MapData>>> undoStack { get; private set; }
+        public Stack<List<KeyValuePair<RenderData, MapData>>> redoStack { get; private set; }
+        private List<KeyValuePair<RenderData, MapData>> tempRenderDataList;
 
         private void Awake()
         {
@@ -65,8 +65,8 @@ namespace MapEditor
             directoryPath = Path.Combine(Application.persistentDataPath, "Json", "Map");
             mapList = new MapList();
             
-            undoStack = new Stack<List<RenderData>>();
-            redoStack = new Stack<List<RenderData>>();
+            undoStack = new Stack<List<KeyValuePair<RenderData, MapData>>>();
+            redoStack = new Stack<List<KeyValuePair<RenderData, MapData>>>();
             mapRenders = new Dictionary<Vector2, List<RenderData>>();
         }
 
@@ -88,16 +88,9 @@ namespace MapEditor
             var list = undoStack.Pop();
             redoStack.Push(list);
 
-            if (list[0].isErased)
+            foreach (var data in list)
             {
-                foreach (var data in list)
-                {
-                    CreateMap(data.mapData);
-                }
-            }
-            else
-            {
-                DeleteMap(list);
+                ChangeMap(data.Key, data.Value);
             }
             
             yield return new WaitForEndOfFrame();
@@ -117,16 +110,9 @@ namespace MapEditor
             var list = redoStack.Pop();
             undoStack.Push(list);
 
-            if (list[0].isErased)
+            foreach (var data in list)
             {
-                foreach (var data in list)
-                {
-                    CreateMap(data);
-                }
-            }
-            else
-            {
-                DeleteMap(list);
+                ChangeMap(data.Key, data.Value);
             }
 
             yield return new WaitForEndOfFrame();
@@ -140,22 +126,24 @@ namespace MapEditor
             mapRenders[pos].Remove(renderData);
             renderData.Disable();
         }
-        
-        public void DeleteMap(List<RenderData> list)
-        {
-            foreach (var data in list)
-            {
-                DeleteMap(data);
-            }
-        }
 
         public RenderData ChangeMap(RenderData renderData, MapData mapData)
         {
-            renderData.mapData = mapData;
-            renderData.ChangeSprite(renderData.mapData.sprite);
-            renderData.Activate();
+            Vector2 pos = new Vector2(mapData.x, mapData.y);
+            
+            if (mapRenders.TryGetValue(pos, out var renders))
+            {
+                foreach (var render in renders)
+                {
+                    if (renderData.CompareTag(render.tag))
+                    {
+                        render.ChangeMapData(mapData);
+                        return render;
+                    }
+                }
+            }
 
-            return renderData;
+            return CreateMap(mapData);
         }
         
         public RenderData CreateMap(MapData data, bool isAddDataList = true)
@@ -215,11 +203,11 @@ namespace MapEditor
 
         private IEnumerator _StartLoadMap()
         {
-            tempRenderDataList = new List<RenderData>();
+            tempRenderDataList = new List<KeyValuePair<RenderData, MapData>>();
             mapSaveBackground.SetActive(true);
             foreach (var data in mapList.dataList)
             {
-                tempRenderDataList.Add(CreateMap(data, false));
+                tempRenderDataList.Add(new KeyValuePair<RenderData, MapData>(CreateMap(data, false), data));
             }
             undoStack.Push(tempRenderDataList);
             
