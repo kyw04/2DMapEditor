@@ -494,22 +494,6 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7258691719680777576, guid: 7b0026b0857af0a40a837e1e4fff920f, type: 3}
-      propertyPath: map
-      value: 
-      objectReference: {fileID: 1880906183}
-    - target: {fileID: 7258691719680777576, guid: 7b0026b0857af0a40a837e1e4fff920f, type: 3}
-      propertyPath: pencil
-      value: 
-      objectReference: {fileID: 11400000, guid: 4e1f809ab70a3fc4baa87a6ef10672fe, type: 2}
-    - target: {fileID: 7258691719680777576, guid: 7b0026b0857af0a40a837e1e4fff920f, type: 3}
-      propertyPath: testText
-      value: 
-      objectReference: {fileID: 456293129}
-    - target: {fileID: 7258691719680777576, guid: 7b0026b0857af0a40a837e1e4fff920f, type: 3}
-      propertyPath: mapParent
-      value: 
-      objectReference: {fileID: 1880906183}
-    - target: {fileID: 7258691719680777576, guid: 7b0026b0857af0a40a837e1e4fff920f, type: 3}
       propertyPath: selectedPencilImage
       value: 
       objectReference: {fileID: 2117941656}
@@ -529,6 +513,10 @@ PrefabInstance:
     - target: {fileID: 1016068238777256515, guid: e271dc1042de7a047a453a73e340aeae, type: 3}
       propertyPath: m_Name
       value: Main Camera
+      objectReference: {fileID: 0}
+    - target: {fileID: 5971101010452246119, guid: e271dc1042de7a047a453a73e340aeae, type: 3}
+      propertyPath: zoomSpeed
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8837961955101644192, guid: e271dc1042de7a047a453a73e340aeae, type: 3}
       propertyPath: m_LocalPosition.x
@@ -730,7 +718,15 @@ PrefabInstance:
     - target: {fileID: 2053932911997583913, guid: 7b5a4ea32b05833418126021551be20d, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 732999711}
+      objectReference: {fileID: 1054856767}
+    - target: {fileID: 2053932911997583913, guid: 7b5a4ea32b05833418126021551be20d, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Redo
+      objectReference: {fileID: 0}
+    - target: {fileID: 2053932911997583913, guid: 7b5a4ea32b05833418126021551be20d, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: MapEditor.GameManager, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 2147757176402743120, guid: 7b5a4ea32b05833418126021551be20d, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -798,7 +794,15 @@ PrefabInstance:
     - target: {fileID: 2732281505684007376, guid: 7b5a4ea32b05833418126021551be20d, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 732999711}
+      objectReference: {fileID: 1054856767}
+    - target: {fileID: 2732281505684007376, guid: 7b5a4ea32b05833418126021551be20d, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Undo
+      objectReference: {fileID: 0}
+    - target: {fileID: 2732281505684007376, guid: 7b5a4ea32b05833418126021551be20d, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: MapEditor.GameManager, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 2738056816293382639, guid: 7b5a4ea32b05833418126021551be20d, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -1171,6 +1175,38 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1654103769}
+    - target: {fileID: 8328894101601788618, guid: 7b5a4ea32b05833418126021551be20d, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8328894101601788618, guid: 7b5a4ea32b05833418126021551be20d, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8328894101601788618, guid: 7b5a4ea32b05833418126021551be20d, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 732999711}
+    - target: {fileID: 8328894101601788618, guid: 7b5a4ea32b05833418126021551be20d, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8328894101601788618, guid: 7b5a4ea32b05833418126021551be20d, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SelectPencil
+      objectReference: {fileID: 0}
+    - target: {fileID: 8328894101601788618, guid: 7b5a4ea32b05833418126021551be20d, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: MapEditor.Pencil.PencilManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8328894101601788618, guid: 7b5a4ea32b05833418126021551be20d, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 11400000, guid: 2299adf789ebce34384bd1132e830ed5, type: 2}
+    - target: {fileID: 8328894101601788618, guid: 7b5a4ea32b05833418126021551be20d, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: MapEditor.Pencil.Drawable, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 8345686163860430350, guid: 7b5a4ea32b05833418126021551be20d, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0

@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.IO;
 using System.Collections.Generic;
-using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.InputSystem.EnhancedTouch;
 
@@ -11,27 +10,27 @@ namespace MapEditor
     [Serializable]
     public class MapData
     {
+        public bool isActivate;
+        public GameObject worldObj;
         public float x, y;
         public Sprite sprite;
         public GameObject defaultObj;
 
-        public MapData(Vector2 pos, Sprite sprite, GameObject defaultObj)
+        public MapData(GameObject worldObj, Vector2 pos, Sprite sprite, GameObject defaultObj)
         {
+            isActivate = false;
+            this.worldObj = worldObj;
             this.x = pos.x;
             this.y = pos.y;
             this.sprite = sprite;
             this.defaultObj = defaultObj;
         }
     }
+    
     [Serializable]
     public class MapList
     {
-        public List<MapData> dataList;
-
-        public MapList()
-        {
-            dataList = new List<MapData>();
-        }
+        public List<MapData> dataList = new();
     }
 
     public class GameManager : MonoBehaviour
@@ -44,6 +43,10 @@ namespace MapEditor
 
         private string directoryPath;
         private Coroutine coroutine;
+        
+        public Stack<List<RenderData>> undoStack { get; private set; }
+        public Stack<List<RenderData>> redoStack { get; private set; }
+        private List<RenderData> tempRenderDataList;
 
         private void Awake()
         {
@@ -59,16 +62,118 @@ namespace MapEditor
 
             directoryPath = Path.Combine(Application.persistentDataPath, "Json", "Map");
             mapList = new MapList();
+            
+            undoStack = new Stack<List<RenderData>>();
+            redoStack = new Stack<List<RenderData>>();
+            
         }
 
         private void OnDisable()
         {
             EnhancedTouchSupport.Disable();
         }
-
-        public void DeleteMap()
+        
+        public void Undo()
         {
+            if (undoStack.Count <= 0)
+                return;
             
+            coroutine ??= StartCoroutine(_StartUndo());
+        }
+
+        private IEnumerator _StartUndo()
+        {
+            var list = undoStack.Pop();
+            redoStack.Push(list);
+
+            if (list[0].isErased)
+            {
+                foreach (var data in list)
+                {
+                    CreateMap(data.mapData);
+                }
+            }
+            else
+            {
+                DeleteMap(list);
+            }
+            
+            // tempRenderDataList = new List<RenderData>();
+            // foreach (var data in list)
+            // {
+            //     tempRenderDataList.Add(data);
+            // }
+            // redoStack.Push(tempRenderDataList);
+            // DeleteMap(tempRenderDataList);
+            
+            yield return new WaitForEndOfFrame();
+            coroutine = null;
+        }
+
+        public void Redo()
+        {
+            if (redoStack.Count <= 0)
+                return;
+            
+            coroutine ??= StartCoroutine(_StartRedo());
+        }
+
+        private IEnumerator _StartRedo()
+        {
+            var list = redoStack.Pop();
+            undoStack.Push(list);
+
+            if (list[0].isErased)
+            {
+                foreach (var data in list)
+                {
+                    CreateMap(data);
+                }
+            }
+            else
+            {
+                DeleteMap(list);
+            }
+
+            yield return new WaitForEndOfFrame();
+            coroutine = null;
+        }
+        
+        public void DeleteMap(List<RenderData> list)
+        {
+            foreach (var data in list)
+            {
+                mapList.dataList.Remove(data.mapData);
+                data.Disable();
+            }
+        }
+
+        public RenderData CreateMap(MapData data, bool isAddDataList = true)
+        {
+            Vector3 pos = new Vector3(data.x, data.y);
+            var obj = Instantiate(data.defaultObj, pos, Quaternion.identity, mapParent);
+            
+            RenderData newRenderData = obj.GetComponent<RenderData>();
+            newRenderData ??= obj.AddComponent<RenderData>();
+            newRenderData.SetData(obj,pos, data.sprite, data.defaultObj);
+            data.worldObj = obj;
+            
+            if (isAddDataList)
+                mapList.dataList.Add(data);
+            
+            return newRenderData;
+        }
+
+        public RenderData CreateMap(RenderData data, bool isAddDataList = true)
+        {
+            if (data.mapData.worldObj != null)
+            {
+                data.Activate();
+
+                return data;
+            }
+
+            return CreateMap(data.mapData);
         }
 
         public void LoadMap(string fileName)
@@ -86,12 +191,14 @@ namespace MapEditor
 
         private IEnumerator _StartLoadMap()
         {
+            tempRenderDataList = new List<RenderData>();
             mapSaveBackground.SetActive(true);
             foreach (var data in mapList.dataList)
             {
-                 var render = Instantiate(data.defaultObj, new Vector3(data.x, data.y), quaternion.identity).GetComponent<SpriteRenderer>();
-                 render.sprite = data.sprite;
+                tempRenderDataList.Add(CreateMap(data, false));
             }
+            undoStack.Push(tempRenderDataList);
+            
             yield return new WaitForEndOfFrame();
             
             coroutine = null;

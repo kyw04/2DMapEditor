@@ -11,15 +11,13 @@ namespace MapEditor.Pencil
 
         public Image selectedPencilImage;
         public Drawable pencil;
-        
-        private Stack<List<GameObject>> undoStack;
-        private Stack<List<GameObject>> redoStack;
-        private List<GameObject> undoList;
+        public float drawStartTime;
+
+        private List<RenderData> undoList;
         private bool isDrawReady;
         private bool isBegin;
         private bool isEnd;
         private float touchStartTime;
-        private float drawStartTime;
 
         private void Awake() 
         {
@@ -31,9 +29,7 @@ namespace MapEditor.Pencil
             Instance = this;
             DontDestroyOnLoad(gameObject);
             
-            undoStack = new Stack<List<GameObject>>();
-            redoStack = new Stack<List<GameObject>>();
-            undoList = new List<GameObject>();
+            undoList = new List<RenderData>();
         }
 
         private void Start()
@@ -57,8 +53,8 @@ namespace MapEditor.Pencil
                 
                 if (undoList.Count > 0)
                 {
-                    undoStack.Push(undoList);
-                    undoList = new List<GameObject>();
+                    GameManager.Instance.undoStack.Push(undoList);
+                    undoList = new List<RenderData>();
                 }
             }
             else if (touchCount == 1)
@@ -83,14 +79,10 @@ namespace MapEditor.Pencil
                     if (obj != null)
                     {
                         var objTrans = obj.transform;
-                        var penData = pencil.data;
                         objTrans.SetParent(GameManager.Instance.mapParent);
-                        var data = new MapData(objTrans.position, penData.sprite, penData.defaultObj);
-                        GameManager.Instance.mapList.dataList.Add(data);
-                        
-                        undoList.Add(obj);
-                        if (redoStack.Count > 0)
-                            redoStack.Clear();
+                        undoList.Add(GameManager.Instance.CreateMap(obj));
+                        if (GameManager.Instance.redoStack.Count > 0)
+                            GameManager.Instance.redoStack.Clear();
                     }
                 }
             }
@@ -100,35 +92,6 @@ namespace MapEditor.Pencil
             }
         }
 
-        public void Undo()
-        {
-            if (undoStack.Count <= 0)
-                return;
-
-            var list = undoStack.Peek();
-            undoStack.Pop();
-            redoStack.Push(list);
-            
-            // change action
-            foreach (var obj in list)
-            {
-                obj.SetActive(false);
-            }
-        }
-
-        public void Redo()
-        {
-            if (redoStack.Count <= 0)
-                return;
-
-            var list = redoStack.Pop();
-            undoStack.Push(list);
-
-            foreach (var obj in list)
-            {
-                obj.SetActive(true);
-            }
-        }
 
         public void SelectPencil(Drawable pen)
         {

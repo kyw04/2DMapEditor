@@ -50,7 +50,7 @@ namespace MapEditor.Pencil
         public DrawableData data;
         public bool isOverlap;
 
-        public virtual GameObject Draw(Vector3 pos)
+        public virtual RenderData Draw(Vector3 pos)
         {
             if (EventSystem.current.IsPointerOverGameObject())
                 return null;
@@ -59,14 +59,15 @@ namespace MapEditor.Pencil
             float x = Mathf.Round(pos.x);
             float y = Mathf.Round(pos.y);
             pos = new Vector3(x, y, 0);
-
-            RaycastHit2D hit = Physics2D.Raycast(pos, Vector3.forward);
-            if (hit)
+                
+            RaycastHit2D hitData = Physics2D.Raycast(pos, Vector3.forward);
+            if (hitData)
             {
-                if (isOverlap && hit.transform.GetComponent<SpriteRenderer>()?.sprite != data.sprite)
+                RenderData renderData = hitData.transform.GetComponent<RenderData>();
+                if (renderData == null || renderData.mapData == null || (isOverlap && renderData.mapData.sprite != data.sprite))
                     return CreateRender(pos);
                 
-                return ChangeRender(pos);
+                return ChangeRender(renderData, pos);
             }
             
             return CreateRender(pos);
@@ -74,7 +75,7 @@ namespace MapEditor.Pencil
 
         public abstract void Begin();
         public abstract void End();
-        protected abstract GameObject CreateRender(Vector3 pos);
-        protected abstract GameObject ChangeRender(Vector3 pos);
+        protected abstract RenderData CreateRender(Vector3 pos);
+        protected abstract RenderData ChangeRender(RenderData renderData, Vector3 pos);
     }
 }
