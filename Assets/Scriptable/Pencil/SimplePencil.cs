@@ -8,16 +8,16 @@ namespace MapEditor.Pencil
         public override void Begin() { }
         public override void End() { }
 
-        protected override RenderData CreateRender(Vector3 pos)
+        protected override RenderData CreateRender(Vector2 pos)
         {
-            return Instantiate(data.defaultObj, pos, Quaternion.identity);
+            MapData mapData = new MapData(null, pos, data.sprite, data.defaultObj);
+            return GameManager.Instance.CreateMap(mapData);
         }
 
-        protected override RenderData ChangeRender(RenderData hitData, Vector3 pos)
+        protected override RenderData ChangeRender(RenderData hitData, Vector2 pos)
         {
-            return null;
+            MapData mapData = new MapData(hitData.gameObject, pos, data.sprite, data.defaultObj);
+            return GameManager.Instance.ChangeMap(hitData, mapData);
         }
-
-        
     }
 }

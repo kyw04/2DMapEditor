@@ -16,7 +16,12 @@ public class RenderData : MonoBehaviour
     {
         isErased = false;
         mapData = new MapData(worldObj, pos, sprite, defaultObj);
-        Activate();
+    }
+
+    public void ChangeSprite(Sprite sprite)
+    {
+        mapData.sprite = sprite;
+        renderer.sprite = sprite;
     }
     
     public void Activate()

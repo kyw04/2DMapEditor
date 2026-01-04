@@ -50,7 +50,7 @@ namespace MapEditor.Pencil
         public DrawableData data;
         public bool isOverlap;
 
-        public virtual RenderData Draw(Vector3 pos)
+        public virtual RenderData Draw(Vector2 pos)
         {
             if (EventSystem.current.IsPointerOverGameObject())
                 return null;
@@ -75,7 +75,7 @@ namespace MapEditor.Pencil
 
         public abstract void Begin();
         public abstract void End();
-        protected abstract RenderData CreateRender(Vector3 pos);
-        protected abstract RenderData ChangeRender(RenderData renderData, Vector3 pos);
+        protected abstract RenderData CreateRender(Vector2 pos);
+        protected abstract RenderData ChangeRender(RenderData renderData, Vector2 pos);
     }
 }

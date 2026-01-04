@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.IO;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem.EnhancedTouch;
 
@@ -40,9 +41,10 @@ namespace MapEditor
         public MapList mapList;
         public Transform mapParent;
         public GameObject mapSaveBackground;
-
+        
         private string directoryPath;
         private Coroutine coroutine;
+        private Dictionary<Vector2, List<RenderData>> mapRenders;
         
         public Stack<List<RenderData>> undoStack { get; private set; }
         public Stack<List<RenderData>> redoStack { get; private set; }
@@ -65,7 +67,7 @@ namespace MapEditor
             
             undoStack = new Stack<List<RenderData>>();
             redoStack = new Stack<List<RenderData>>();
-            
+            mapRenders = new Dictionary<Vector2, List<RenderData>>();
         }
 
         private void OnDisable()
@@ -97,14 +99,6 @@ namespace MapEditor
             {
                 DeleteMap(list);
             }
-            
-            // tempRenderDataList = new List<RenderData>();
-            // foreach (var data in list)
-            // {
-            //     tempRenderDataList.Add(data);
-            // }
-            // redoStack.Push(tempRenderDataList);
-            // DeleteMap(tempRenderDataList);
             
             yield return new WaitForEndOfFrame();
             coroutine = null;
@@ -138,25 +132,56 @@ namespace MapEditor
             yield return new WaitForEndOfFrame();
             coroutine = null;
         }
+
+        public void DeleteMap(RenderData renderData)
+        {
+            MapData mapData = renderData.mapData;
+            Vector2 pos = new Vector2(mapData.x, mapData.y);
+            mapRenders[pos].Remove(renderData);
+            renderData.Disable();
+        }
         
         public void DeleteMap(List<RenderData> list)
         {
             foreach (var data in list)
             {
-                mapList.dataList.Remove(data.mapData);
-                data.Disable();
+                DeleteMap(data);
             }
         }
 
+        public RenderData ChangeMap(RenderData renderData, MapData mapData)
+        {
+            renderData.mapData = mapData;
+            renderData.ChangeSprite(renderData.mapData.sprite);
+            renderData.Activate();
+
+            return renderData;
+        }
+        
         public RenderData CreateMap(MapData data, bool isAddDataList = true)
         {
-            Vector3 pos = new Vector3(data.x, data.y);
-            var obj = Instantiate(data.defaultObj, pos, Quaternion.identity, mapParent);
+            Vector2 pos = new Vector2(data.x, data.y);
+            if (mapRenders.TryGetValue(pos, out var renders))
+            {
+                foreach (var render in renders)
+                {
+                    if (data.sprite == render.mapData.sprite)
+                    {
+                        return render;
+                    }
+                }
+            }
             
+            var obj = Instantiate(data.defaultObj, pos, Quaternion.identity, mapParent);
+            data.worldObj = obj;
+
             RenderData newRenderData = obj.GetComponent<RenderData>();
             newRenderData ??= obj.AddComponent<RenderData>();
             newRenderData.SetData(obj,pos, data.sprite, data.defaultObj);
-            data.worldObj = obj;
+            newRenderData.Activate();
+            
+            mapRenders.TryAdd(pos, new List<RenderData>());
+            mapRenders[pos].Add(newRenderData);
             
             if (isAddDataList)
                 mapList.dataList.Add(data);
@@ -169,7 +194,6 @@ namespace MapEditor
             if (data.mapData.worldObj != null)
             {
                 data.Activate();
-
                 return data;
             }
 

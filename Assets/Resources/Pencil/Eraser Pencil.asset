@@ -15,4 +15,4 @@ MonoBehaviour:
   data:
     defaultObj: {fileID: 0}
     sprite: {fileID: 0}
-  isOverlap: 1
+  isOverlap: 0

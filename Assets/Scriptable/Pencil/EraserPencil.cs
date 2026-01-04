@@ -9,17 +9,17 @@ namespace MapEditor.Pencil
 
         public override void End() { }
 
-        protected override RenderData CreateRender(Vector3 pos)
+        protected override RenderData CreateRender(Vector2 pos)
         {
             return null;
         }
 
-        protected override RenderData ChangeRender(RenderData renderData, Vector3 pos)
+        protected override RenderData ChangeRender(RenderData renderData, Vector2 pos)
         {
             if (renderData.isErased)
                 return null;
-            
-            renderData.Disable();
+
+            GameManager.Instance.DeleteMap(renderData);
             return renderData;
         }
     }

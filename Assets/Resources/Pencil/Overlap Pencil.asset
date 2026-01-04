@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MapEditor.Pencil.SimplePencil
   data:
     defaultObj: {fileID: 2400803431224416152, guid: 27e7f5152a53cea4dac881dec3b720f0, type: 3}
-    sprite: {fileID: 21300000, guid: 29c9cded5e558164aaf8c9bf08aa1510, type: 3}
+    sprite: {fileID: 21300084, guid: c3a40e1c46727b94e959990527f8e7fa, type: 3}
   isOverlap: 1
