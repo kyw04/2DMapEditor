@@ -4,6 +4,7 @@ using UnityEngine;
 public class RenderData : MonoBehaviour
 {
     public bool isErased;
+    public MapData oldMapData;
     public MapData mapData;
     private new SpriteRenderer renderer;
     
@@ -16,6 +17,7 @@ public class RenderData : MonoBehaviour
     {
         isErased = false;
         mapData = new MapData(worldObj, pos, sprite, defaultObj);
+        oldMapData = new MapData(null, pos, null, defaultObj);
     }
 
     public void ChangeMapData(MapData data)
@@ -28,6 +30,7 @@ public class RenderData : MonoBehaviour
         else
             Disable();
 
+        oldMapData = mapData;
         mapData = data;
         renderer.sprite = data.sprite;
     }
