@@ -34,6 +34,25 @@ namespace MapEditor
         public List<MapData> dataList = new();
     }
 
+    public class UndoList
+    {
+        public int Count => renderData.Count;
+        
+        private List<RenderData> renderData = new();
+        private List<MapData> returnMapData = new();
+
+        public void Push(RenderData renderValue)
+        {
+            renderData.Add(renderValue);
+            returnMapData.Add(renderValue.oldMapData);
+        }
+
+        public KeyValuePair<RenderData, MapData> GetValueToIndex(int index)
+        {
+            return new KeyValuePair<RenderData, MapData>(renderData[index], returnMapData[index]);
+        }
+    }
+    
     public class GameManager : MonoBehaviour
     {
         public static GameManager Instance { get; private set; }
@@ -46,9 +65,9 @@ namespace MapEditor
         private Coroutine coroutine;
         private Dictionary<Vector2, List<RenderData>> mapRenders;
         
-        public Stack<List<KeyValuePair<RenderData, MapData>>> undoStack { get; private set; }
-        public Stack<List<KeyValuePair<RenderData, MapData>>> redoStack { get; private set; }
-        private List<KeyValuePair<RenderData, MapData>> tempRenderDataList;
+        public Stack<UndoList> undoStack { get; private set; }
+        public Stack<UndoList> redoStack { get; private set; }
+        private UndoList tempRenderDataList;
 
         private void Awake()
         {
@@ -65,8 +84,8 @@ namespace MapEditor
             directoryPath = Path.Combine(Application.persistentDataPath, "Json", "Map");
             mapList = new MapList();
             
-            undoStack = new Stack<List<KeyValuePair<RenderData, MapData>>>();
-            redoStack = new Stack<List<KeyValuePair<RenderData, MapData>>>();
+            undoStack = new Stack<UndoList>();
+            redoStack = new Stack<UndoList>();
             mapRenders = new Dictionary<Vector2, List<RenderData>>();
         }
 
@@ -85,11 +104,12 @@ namespace MapEditor
 
         private IEnumerator _StartUndo()
         {
-            var list = undoStack.Pop();
+            UndoList list = undoStack.Pop();
             redoStack.Push(list);
 
-            foreach (var data in list)
+            for (int i = 0; i < list.Count; i++)
             {
+                var data = list.GetValueToIndex(i);
                 ChangeMap(data.Key, data.Value);
             }
             
@@ -107,11 +127,12 @@ namespace MapEditor
 
         private IEnumerator _StartRedo()
         {
-            var list = redoStack.Pop();
+            UndoList list = redoStack.Pop();
             undoStack.Push(list);
 
-            foreach (var data in list)
+            for (int i = 0; i < list.Count; i++)
             {
+                var data = list.GetValueToIndex(i);
                 ChangeMap(data.Key, data.Value);
             }
 
@@ -143,7 +164,7 @@ namespace MapEditor
                 }
             }
 
-            return CreateMap(mapData);
+            return null;
         }
         
         public RenderData CreateMap(MapData data, bool isAddDataList = true)
@@ -203,11 +224,12 @@ namespace MapEditor
 
         private IEnumerator _StartLoadMap()
         {
-            tempRenderDataList = new List<KeyValuePair<RenderData, MapData>>();
             mapSaveBackground.SetActive(true);
+            
+            tempRenderDataList = new UndoList();
             foreach (var data in mapList.dataList)
             {
-                tempRenderDataList.Add(new KeyValuePair<RenderData, MapData>(CreateMap(data, false), data));
+                tempRenderDataList.Push(CreateMap(data, false));
             }
             undoStack.Push(tempRenderDataList);
             
