@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.IO;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem.EnhancedTouch;
 
@@ -26,6 +25,13 @@ namespace MapEditor
             this.sprite = sprite;
             this.defaultObj = defaultObj;
         }
+
+        public bool Compare(MapData other)
+        {
+            return  worldObj == other.worldObj &&
+                    sprite == other.sprite &&
+                    defaultObj == other.defaultObj;
+        }
     }
     
     [Serializable]
@@ -39,17 +45,15 @@ namespace MapEditor
         public int Count => renderData.Count;
         
         private List<RenderData> renderData = new();
-        private List<MapData> returnMapData = new();
 
         public void Push(RenderData renderValue)
         {
             renderData.Add(renderValue);
-            returnMapData.Add(renderValue.oldMapData);
         }
 
-        public KeyValuePair<RenderData, MapData> GetValueToIndex(int index)
+        public RenderData GetValueToIndex(int index)
         {
-            return new KeyValuePair<RenderData, MapData>(renderData[index], returnMapData[index]);
+            return renderData[index];
         }
     }
     
@@ -110,7 +114,7 @@ namespace MapEditor
             for (int i = 0; i < list.Count; i++)
             {
                 var data = list.GetValueToIndex(i);
-                ChangeMap(data.Key, data.Value);
+                ChangeMap(data, data.oldMapData);
             }
             
             yield return new WaitForEndOfFrame();
@@ -133,7 +137,7 @@ namespace MapEditor
             for (int i = 0; i < list.Count; i++)
             {
                 var data = list.GetValueToIndex(i);
-                ChangeMap(data.Key, data.Value);
+                ChangeMap(data, data.oldMapData);
             }
 
             yield return new WaitForEndOfFrame();
@@ -142,9 +146,6 @@ namespace MapEditor
 
         public void DeleteMap(RenderData renderData)
         {
-            MapData mapData = renderData.mapData;
-            Vector2 pos = new Vector2(mapData.x, mapData.y);
-            mapRenders[pos].Remove(renderData);
             renderData.Disable();
         }
 
@@ -156,7 +157,7 @@ namespace MapEditor
             {
                 foreach (var render in renders)
                 {
-                    if (renderData.CompareTag(render.tag))
+                    if (renderData.CompareTag(render.tag) &&  !mapData.Compare(renderData.mapData))
                     {
                         render.ChangeMapData(mapData);
                         return render;
@@ -174,7 +175,7 @@ namespace MapEditor
             {
                 foreach (var render in renders)
                 {
-                    if (data.sprite == render.mapData.sprite)
+                    if (data.Compare(render.mapData))
                     {
                         return render;
                     }
@@ -186,7 +187,7 @@ namespace MapEditor
 
             RenderData newRenderData = obj.GetComponent<RenderData>();
             newRenderData ??= obj.AddComponent<RenderData>();
-            newRenderData.SetData(obj,pos, data.sprite, data.defaultObj);
+            newRenderData.SetData(obj, pos, data.sprite, data.defaultObj);
             newRenderData.Activate();
             
             mapRenders.TryAdd(pos, new List<RenderData>());

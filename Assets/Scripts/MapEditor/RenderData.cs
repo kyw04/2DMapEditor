@@ -22,17 +22,17 @@ public class RenderData : MonoBehaviour
 
     public void ChangeMapData(MapData data)
     {
-        if (mapData == data)
+        if (mapData.Compare(data))
             return;
+
+        oldMapData = mapData;
+        mapData = data;
+        renderer.sprite = data.sprite;
         
         if (data.isActivate)
             Activate();
         else
             Disable();
-
-        oldMapData = mapData;
-        mapData = data;
-        renderer.sprite = data.sprite;
     }
     
     public void Activate()
@@ -45,6 +45,7 @@ public class RenderData : MonoBehaviour
 
     public void Disable()
     {
+        oldMapData = mapData;
         isErased = true;
         mapData.isActivate = false;
         renderer.enabled = false;
