@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.IO;
 using System.Collections.Generic;
+using System.Data;
 using UnityEngine;
 using UnityEngine.InputSystem.EnhancedTouch;
 
@@ -144,33 +145,8 @@ namespace MapEditor
             coroutine = null;
         }
 
-        public void DeleteMap(RenderData renderData)
+        public RenderData FindRenderData(Vector2 pos, MapData data)
         {
-            renderData.Disable();
-        }
-
-        public RenderData ChangeMap(RenderData renderData, MapData mapData)
-        {
-            Vector2 pos = new Vector2(mapData.x, mapData.y);
-            
-            if (mapRenders.TryGetValue(pos, out var renders))
-            {
-                foreach (var render in renders)
-                {
-                    if (renderData.CompareTag(render.tag) &&  !mapData.Compare(renderData.mapData))
-                    {
-                        render.ChangeMapData(mapData);
-                        return render;
-                    }
-                }
-            }
-
-            return null;
-        }
-        
-        public RenderData CreateMap(MapData data, bool isAddDataList = true)
-        {
-            Vector2 pos = new Vector2(data.x, data.y);
             if (mapRenders.TryGetValue(pos, out var renders))
             {
                 foreach (var render in renders)
@@ -180,6 +156,37 @@ namespace MapEditor
                         return render;
                     }
                 }
+            }
+            
+            return null;
+        }
+        
+        public void DeleteMap(RenderData renderData)
+        {
+            renderData.Disable();
+        }
+
+        public RenderData ChangeMap(RenderData renderData, MapData mapData)
+        {
+            Vector2 pos = new Vector2(mapData.x, mapData.y);
+            var render = FindRenderData(pos, renderData.mapData);
+
+            if (!mapData.Compare(renderData.mapData))
+            {
+                render.ChangeMapData(mapData);
+                return render;
+            }
+
+            return null;
+        }
+        
+        public RenderData CreateMap(MapData data, bool isAddDataList = true)
+        {
+            Vector2 pos = new Vector2(data.x, data.y);
+            var render = FindRenderData(pos, data);
+            if (render != null)
+            {
+                return render;
             }
             
             var obj = Instantiate(data.defaultObj, pos, Quaternion.identity, mapParent);
