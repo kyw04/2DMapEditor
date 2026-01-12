@@ -10,8 +10,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d8d1bf503e852664abbe7b349ea6de1f, type: 3}
-  m_Name: Simple Pencil
+  m_Name: Wall Pencil
   m_EditorClassIdentifier: Assembly-CSharp::MapEditor.Pencil.SimplePencil
   data:
     defaultObj: {fileID: 2400803431224416152, guid: a26e67286f02c4f43b632315ff1bb7e2, type: 3}
-    sprite: {fileID: 21300020, guid: 1c9ed9d1200c29d4cbfd2071028c1cd5, type: 3}
+    sprite: {fileID: 21300022, guid: 9f8f114589864b6489859a58fbb6baf9, type: 3}
+  filter:
+    useTriggers: 0
+    useLayerMask: 1
+    useDepth: 0
+    useOutsideDepth: 0
+    useNormalAngle: 0
+    useOutsideNormalAngle: 0
+    layerMask:
+      serializedVersion: 2
+      m_Bits: 256
+    minDepth: 0
+    maxDepth: 0
+    minNormalAngle: 0
+    maxNormalAngle: 0

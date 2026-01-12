@@ -7,7 +7,7 @@ namespace MapEditor
         public bool isErased;
         public MapData oldMapData;
         public MapData mapData;
-        private new SpriteRenderer renderer;
+        public new SpriteRenderer renderer;
     
         public void Awake()
         {

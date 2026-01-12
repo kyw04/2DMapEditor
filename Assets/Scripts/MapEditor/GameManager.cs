@@ -85,8 +85,8 @@ namespace MapEditor
         
         private string directoryPath;
         private Coroutine coroutine;
-        private Dictionary<Vector2, List<RenderData>> mapRenders;
         
+        public Dictionary<Vector2, List<RenderData>> mapRenders { get; private set; }
         public Stack<UndoList> undoStack { get; private set; }
         public Stack<UndoList> redoStack { get; private set; }
         private UndoList tempRenderDataList;

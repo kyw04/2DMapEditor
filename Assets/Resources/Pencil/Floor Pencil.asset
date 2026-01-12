@@ -9,12 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b740080d922ea4c439e5cc59ca165879, type: 3}
-  m_Name: Eraser Pencil
-  m_EditorClassIdentifier: Assembly-CSharp::MapEditor.Pencil.EraserPencil
+  m_Script: {fileID: 11500000, guid: d8d1bf503e852664abbe7b349ea6de1f, type: 3}
+  m_Name: Floor Pencil
+  m_EditorClassIdentifier: Assembly-CSharp::MapEditor.Pencil.SimplePencil
   data:
-    defaultObj: {fileID: 0}
-    sprite: {fileID: 0}
+    defaultObj: {fileID: 2400803431224416152, guid: a3cda8a2ff355284d8b28ae9ff2b5baa, type: 3}
+    sprite: {fileID: 21300018, guid: a07735877a3bd644094331b137b71878, type: 3}
   filter:
     useTriggers: 0
     useLayerMask: 1
@@ -24,7 +24,7 @@ MonoBehaviour:
     useOutsideNormalAngle: 0
     layerMask:
       serializedVersion: 2
-      m_Bits: 4294967295
+      m_Bits: 128
     minDepth: 0
     maxDepth: 0
     minNormalAngle: 0
