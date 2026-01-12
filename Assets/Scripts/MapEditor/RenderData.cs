@@ -17,7 +17,7 @@ public class RenderData : MonoBehaviour
     {
         isErased = false;
         mapData = new MapData(worldObj, pos, sprite, defaultObj);
-        oldMapData = new MapData(null, pos, null, defaultObj);
+        oldMapData = new MapData(worldObj, pos, null, defaultObj) { isActivate = false };
     }
     
     public void Apply(MapData data)
@@ -40,30 +40,35 @@ public class RenderData : MonoBehaviour
 
     public void ChangeMapData(MapData data)
     {
-        if (mapData.Compare(data))
+        if (mapData.Compare(data) && mapData.isActivate == data.isActivate)
             return;
 
-        oldMapData = mapData;
+        oldMapData = mapData != null ? mapData.Clone() : null;
         mapData = data;
         renderer.sprite = data.sprite;
-        
+
         if (data.isActivate)
-            Activate();
+            Activate(recordOld: false);
         else
-            Disable();
+            Disable(recordOld: false);
     }
     
-    public void Activate()
+    public void Activate(bool recordOld = true)
     {
+        if (recordOld)
+            oldMapData = mapData.Clone();
+        
         isErased = false;
         mapData.isActivate = true;
         renderer.enabled = true;
         renderer.sprite = mapData.sprite;
     }
 
-    public void Disable()
+    public void Disable(bool recordOld = true)
     {
-        oldMapData = mapData;
+        if (recordOld)
+            oldMapData = mapData.Clone();
+        
         isErased = true;
         mapData.isActivate = false;
         renderer.enabled = false;

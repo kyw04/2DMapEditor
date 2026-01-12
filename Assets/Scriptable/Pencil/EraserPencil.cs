@@ -16,6 +16,9 @@ namespace MapEditor.Pencil
 
         protected override RenderData ChangeRender(RenderData renderData, Vector2 pos)
         {
+            if (renderData == null)
+                return null;
+
             if (renderData.isErased)
                 return null;
 

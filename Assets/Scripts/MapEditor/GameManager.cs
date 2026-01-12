@@ -64,11 +64,6 @@ namespace MapEditor
             if (target == null)
                 return;
 
-            var temp = target.mapData;
-            Vector2 pos = new Vector2(temp.x, temp.y);
-            before ??= new MapData(temp.defaultObj, pos, null, temp.defaultObj);
-            after ??= new MapData(temp.defaultObj, pos, null, temp.defaultObj);
-            
             changes.Add(new MapChange
             {
                 target = target,
@@ -137,31 +132,12 @@ namespace MapEditor
             for (int i = 0; i < list.Count; i++)
             {
                 var ch = list.Get(i);
-                ch.target.Apply(ch.before);
+                ch.target.Apply(ch.after);
             }
 
             yield return new WaitForEndOfFrame();
             coroutine = null;
         }
-        
-        public void EraseWithUndo(RenderData target)
-        {
-            if (target == null) return;
-
-            var batch = new UndoList();
-
-            var before = target.mapData.Clone();
-            var after = target.mapData.Clone();
-            after.isActivate = false;
-
-            batch.Add(target, before, after);
-
-            target.Apply(after);
-
-            undoStack.Push(batch);
-            if (redoStack.Count > 0) redoStack.Clear();
-        }
-
 
         public void Redo()
         {
@@ -179,13 +155,12 @@ namespace MapEditor
             for (int i = 0; i < list.Count; i++)
             {
                 var ch = list.Get(i);
-                ch.target.Apply(ch.after);
+                ch.target.Apply(ch.before);
             }
 
             yield return new WaitForEndOfFrame();
             coroutine = null;
         }
-
 
         public RenderData FindRenderData(Vector2 pos, MapData data)
         {
@@ -227,9 +202,7 @@ namespace MapEditor
             Vector2 pos = new Vector2(data.x, data.y);
             var render = FindRenderData(pos, data);
             if (render != null)
-            {
                 return render;
-            }
             
             var obj = Instantiate(data.defaultObj, pos, Quaternion.identity, mapParent);
             data.worldObj = obj;
@@ -237,7 +210,7 @@ namespace MapEditor
             RenderData newRenderData = obj.GetComponent<RenderData>();
             newRenderData ??= obj.AddComponent<RenderData>();
             newRenderData.SetData(obj, pos, data.sprite, data.defaultObj);
-            newRenderData.Activate();
+            newRenderData.Activate(recordOld: false);
             
             mapRenders.TryAdd(pos, new List<RenderData>());
             mapRenders[pos].Add(newRenderData);
@@ -246,17 +219,6 @@ namespace MapEditor
                 mapList.dataList.Add(data);
             
             return newRenderData;
-        }
-
-        public RenderData CreateMap(RenderData data, bool isAddDataList = true)
-        {
-            if (data.mapData.worldObj != null)
-            {
-                data.Activate();
-                return data;
-            }
-
-            return CreateMap(data.mapData);
         }
 
         public void LoadMap(string fileName)
@@ -279,7 +241,9 @@ namespace MapEditor
             tempRenderDataList = new UndoList();
             foreach (var data in mapList.dataList)
             {
-                tempRenderDataList.Add(CreateMap(data, false), null, data);
+                var before = data.Clone();
+                data.sprite = null;
+                tempRenderDataList.Add(CreateMap(data, false), before, data);
             }
             undoStack.Push(tempRenderDataList);
             
@@ -291,10 +255,40 @@ namespace MapEditor
         
         public void SaveMap(string fileName)
         {
-            if (!File.Exists(directoryPath))
+            if (!Directory.Exists(directoryPath))
                 Directory.CreateDirectory(directoryPath);
 
+            mapList = BuildMapListFromRenders();
+
             coroutine ??= StartCoroutine(_StartSaveMap(fileName));
+        }
+
+        private MapList BuildMapListFromRenders()
+        {
+            var list = new MapList();
+
+            foreach (var kv in mapRenders)
+            {
+                var renders = kv.Value;
+                if (renders == null) continue;
+
+                foreach (var r in renders)
+                {
+                    if (r == null || r.mapData == null) continue;
+                    if (!r.mapData.isActivate) continue;
+                    if (r.mapData.defaultObj == null) continue;
+
+                    Vector2 pos = new Vector2(r.mapData.x, r.mapData.y);
+                    var data = new MapData(null, pos, r.mapData.sprite, r.mapData.defaultObj)
+                    {
+                        isActivate = true
+                    };
+
+                    list.dataList.Add(data);
+                }
+            }
+
+            return list;
         }
 
         private IEnumerator _StartSaveMap(string fileName)

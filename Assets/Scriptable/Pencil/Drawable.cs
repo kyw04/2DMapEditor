@@ -47,7 +47,8 @@ namespace MapEditor.Pencil
     public abstract class Drawable : ScriptableObject
     {
         public DrawableData data;
-
+        
+        
         public virtual RenderData Draw(Vector2 pos)
         {
             if (EventSystem.current.IsPointerOverGameObject())
@@ -62,6 +63,7 @@ namespace MapEditor.Pencil
             if (hitData)
             {
                 RenderData renderData = hitData.transform.GetComponent<RenderData>();
+
                 if (data.defaultObj == null)
                     return ChangeRender(renderData, pos);
 
