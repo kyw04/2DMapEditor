@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.IO;
 using System.Collections.Generic;
-using System.Data;
 using UnityEngine;
 using UnityEngine.InputSystem.EnhancedTouch;
 
@@ -27,6 +26,13 @@ namespace MapEditor
             this.defaultObj = defaultObj;
         }
 
+        public MapData Clone()
+        {
+            var c = new MapData(worldObj, new Vector2(x, y), sprite, defaultObj);
+            c.isActivate = isActivate;
+            return c;
+        }
+
         public bool Compare(MapData other)
         {
             return  worldObj == other.worldObj &&
@@ -41,23 +47,39 @@ namespace MapEditor
         public List<MapData> dataList = new();
     }
 
+    public struct MapChange
+    {
+        public RenderData target;
+        public MapData before;
+        public MapData after;
+    }
+
     public class UndoList
     {
-        public int Count => renderData.Count;
-        
-        private List<RenderData> renderData = new();
+        public int Count => changes.Count;
+        private List<MapChange> changes = new();
 
-        public void Push(RenderData renderValue)
+        public void Add(RenderData target, MapData before, MapData after)
         {
-            renderData.Add(renderValue);
+            if (target == null)
+                return;
+
+            var temp = target.mapData;
+            Vector2 pos = new Vector2(temp.x, temp.y);
+            before ??= new MapData(temp.defaultObj, pos, null, temp.defaultObj);
+            after ??= new MapData(temp.defaultObj, pos, null, temp.defaultObj);
+            
+            changes.Add(new MapChange
+            {
+                target = target,
+                before = before.Clone(),
+                after = after.Clone()
+            });
         }
 
-        public RenderData GetValueToIndex(int index)
-        {
-            return renderData[index];
-        }
+        public MapChange Get(int index) => changes[index];
     }
-    
+
     public class GameManager : MonoBehaviour
     {
         public static GameManager Instance { get; private set; }
@@ -114,13 +136,32 @@ namespace MapEditor
 
             for (int i = 0; i < list.Count; i++)
             {
-                var data = list.GetValueToIndex(i);
-                ChangeMap(data, data.oldMapData);
+                var ch = list.Get(i);
+                ch.target.Apply(ch.before);
             }
-            
+
             yield return new WaitForEndOfFrame();
             coroutine = null;
         }
+        
+        public void EraseWithUndo(RenderData target)
+        {
+            if (target == null) return;
+
+            var batch = new UndoList();
+
+            var before = target.mapData.Clone();
+            var after = target.mapData.Clone();
+            after.isActivate = false;
+
+            batch.Add(target, before, after);
+
+            target.Apply(after);
+
+            undoStack.Push(batch);
+            if (redoStack.Count > 0) redoStack.Clear();
+        }
+
 
         public void Redo()
         {
@@ -137,13 +178,14 @@ namespace MapEditor
 
             for (int i = 0; i < list.Count; i++)
             {
-                var data = list.GetValueToIndex(i);
-                ChangeMap(data, data.oldMapData);
+                var ch = list.Get(i);
+                ch.target.Apply(ch.after);
             }
 
             yield return new WaitForEndOfFrame();
             coroutine = null;
         }
+
 
         public RenderData FindRenderData(Vector2 pos, MapData data)
         {
@@ -237,7 +279,7 @@ namespace MapEditor
             tempRenderDataList = new UndoList();
             foreach (var data in mapList.dataList)
             {
-                tempRenderDataList.Push(CreateMap(data, false));
+                tempRenderDataList.Add(CreateMap(data, false), null, data);
             }
             undoStack.Push(tempRenderDataList);
             

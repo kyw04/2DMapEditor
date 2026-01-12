@@ -80,7 +80,7 @@ namespace MapEditor.Pencil
                     {
                         var objTrans = obj.transform;
                         objTrans.SetParent(GameManager.Instance.mapParent);
-                        undoList.Push(obj);
+                        undoList.Add(obj, obj.oldMapData, obj.mapData);
                         if (GameManager.Instance.redoStack.Count > 0)
                             GameManager.Instance.redoStack.Clear();
                     }

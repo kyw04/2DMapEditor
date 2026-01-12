@@ -19,6 +19,24 @@ public class RenderData : MonoBehaviour
         mapData = new MapData(worldObj, pos, sprite, defaultObj);
         oldMapData = new MapData(null, pos, null, defaultObj);
     }
+    
+    public void Apply(MapData data)
+    {
+        mapData = data;
+
+        if (mapData.isActivate)
+        {
+            isErased = false;
+            renderer.enabled = true;
+            renderer.sprite = mapData.sprite;
+        }
+        else
+        {
+            isErased = true;
+            renderer.enabled = false;
+            renderer.sprite = mapData.sprite;
+        }
+    }
 
     public void ChangeMapData(MapData data)
     {
