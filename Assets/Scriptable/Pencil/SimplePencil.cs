@@ -8,9 +8,9 @@ namespace MapEditor.Pencil
         public override void Begin() { }
         public override void End() { }
 
-        protected override RenderData CreateRender(Vector2 pos)
+        protected override RenderData CreateRender(int sortingOrder, Vector2 pos)
         {
-            MapData mapData = new MapData(null, pos, data.sprite, data.defaultObj);
+            MapData mapData = new MapData(null, pos, data.sprite, data.defaultObj, sortingOrder);
             return GameManager.Instance.CreateMap(mapData);
         }
 

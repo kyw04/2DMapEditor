@@ -11,13 +11,13 @@ namespace MapEditor.Pencil
             if (lastPos == Vector2.zero)
                 lastPos = pos;
             
-            return CreateRender(pos);
+            return CreateRender(0, pos);
         }
 
         public override void Begin() { lastPos = Vector3.zero; }
         public override void End() { }
 
-        protected override RenderData CreateRender(Vector2 pos)
+        protected override RenderData CreateRender(int sortingOrder, Vector2 pos)
         {
             float dir = CameraController.Instance.invert ? 1f : -1f;
             Vector2 newPos = pos - lastPos;
@@ -30,7 +30,7 @@ namespace MapEditor.Pencil
 
         protected override RenderData ChangeRender(RenderData renderData, Vector2 pos)
         {
-            return CreateRender(pos);
+            return CreateRender(0, pos);
         }
 
         

@@ -9,7 +9,7 @@ namespace MapEditor.Pencil
 
         public override void End() { }
 
-        protected override RenderData CreateRender(Vector2 pos)
+        protected override RenderData CreateRender(int sortingOrder, Vector2 pos)
         {
             return null;
         }

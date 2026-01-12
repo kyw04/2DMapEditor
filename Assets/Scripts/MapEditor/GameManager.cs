@@ -15,8 +15,9 @@ namespace MapEditor
         public float x, y;
         public Sprite sprite;
         public GameObject defaultObj;
-
-        public MapData(GameObject worldObj, Vector2 pos, Sprite sprite, GameObject defaultObj)
+        public int sortingOrder;
+        
+        public MapData(GameObject worldObj, Vector2 pos, Sprite sprite, GameObject defaultObj, int sortingOrder = 0)
         {
             isActivate = true;
             this.worldObj = worldObj;
@@ -24,11 +25,12 @@ namespace MapEditor
             this.y = pos.y;
             this.sprite = sprite;
             this.defaultObj = defaultObj;
+            this.sortingOrder = sortingOrder;
         }
 
         public MapData Clone()
         {
-            var c = new MapData(worldObj, new Vector2(x, y), sprite, defaultObj);
+            var c = new MapData(worldObj, new Vector2(x, y), sprite, defaultObj, sortingOrder);
             c.isActivate = isActivate;
             return c;
         }
@@ -209,9 +211,9 @@ namespace MapEditor
 
             RenderData newRenderData = obj.GetComponent<RenderData>();
             newRenderData ??= obj.AddComponent<RenderData>();
-            newRenderData.SetData(obj, pos, data.sprite, data.defaultObj);
+            newRenderData.SetData(obj, pos, data.sprite, data.defaultObj, data.sortingOrder);
             newRenderData.Activate(recordOld: false);
-            
+
             mapRenders.TryAdd(pos, new List<RenderData>());
             mapRenders[pos].Add(newRenderData);
             
@@ -242,7 +244,6 @@ namespace MapEditor
             foreach (var data in mapList.dataList)
             {
                 var before = data.Clone();
-                data.sprite = null;
                 tempRenderDataList.Add(CreateMap(data, false), before, data);
             }
             undoStack.Push(tempRenderDataList);
@@ -277,9 +278,11 @@ namespace MapEditor
                     if (r == null || r.mapData == null) continue;
                     if (!r.mapData.isActivate) continue;
                     if (r.mapData.defaultObj == null) continue;
+                    if (r.mapData.sprite == null) continue;
 
                     Vector2 pos = new Vector2(r.mapData.x, r.mapData.y);
-                    var data = new MapData(null, pos, r.mapData.sprite, r.mapData.defaultObj)
+                    Debug.Log(r.mapData.sprite);
+                    var data = new MapData(null, pos, r.mapData.sprite, r.mapData.defaultObj, r.mapData.sortingOrder)
                     {
                         isActivate = true
                     };

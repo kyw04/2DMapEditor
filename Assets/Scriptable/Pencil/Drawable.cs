@@ -87,7 +87,7 @@ namespace MapEditor.Pencil
             }
             
             if (renderData == null)
-                return CreateRender(pos);
+                return CreateRender(sortingOrder, pos);
 
             renderData.renderer.sortingOrder = sortingOrder;
             return ChangeRender(renderData, pos);
@@ -109,7 +109,7 @@ namespace MapEditor.Pencil
 
         public abstract void Begin();
         public abstract void End();
-        protected abstract RenderData CreateRender(Vector2 pos);
+        protected abstract RenderData CreateRender(int sortingOrder, Vector2 pos);
         protected abstract RenderData ChangeRender(RenderData renderData, Vector2 pos);
     }
 }
