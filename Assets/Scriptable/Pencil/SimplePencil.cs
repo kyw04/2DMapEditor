@@ -10,13 +10,13 @@ namespace MapEditor.Pencil
 
         protected override RenderData CreateRender(int sortingOrder, Vector2 pos)
         {
-            MapData mapData = new MapData(null, pos, data.sprite, data.defaultObj, sortingOrder);
+            MapData mapData = new MapData(pos, data.sprite, data.defaultObj, sortingOrder);
             return GameManager.Instance.CreateMap(mapData);
         }
 
         protected override RenderData ChangeRender(RenderData hitData, Vector2 pos)
         {
-            MapData mapData = new MapData(hitData.gameObject, pos, data.sprite, data.defaultObj);
+            MapData mapData = new MapData(pos, data.sprite, data.defaultObj);
             return GameManager.Instance.ChangeMap(hitData, mapData);
         }
     }

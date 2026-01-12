@@ -14,12 +14,12 @@ namespace MapEditor
             renderer = GetComponent<SpriteRenderer>();
         }
 
-        public void SetData(GameObject worldObj, Vector2 pos, Sprite sprite, GameObject defaultObj, int sortingOrder = 0)
+        public void SetData(Vector2 pos, Sprite sprite, GameObject defaultObj, int sortingOrder = 0)
         {
             isErased = false;
             renderer.sortingOrder = sortingOrder;
-            mapData = new MapData(worldObj, pos, sprite, defaultObj, sortingOrder);
-            oldMapData = new MapData(worldObj, pos, null, defaultObj, sortingOrder) { isActivate = false };
+            mapData = new MapData(pos, sprite, defaultObj, sortingOrder);
+            oldMapData = new MapData(pos, null, defaultObj, sortingOrder) { isActivate = false };
         }
     
         public void Apply(MapData data)

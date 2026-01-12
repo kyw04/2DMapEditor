@@ -11,16 +11,14 @@ namespace MapEditor
     public class MapData
     {
         public bool isActivate;
-        public GameObject worldObj;
         public float x, y;
         public Sprite sprite;
         public GameObject defaultObj;
         public int sortingOrder;
         
-        public MapData(GameObject worldObj, Vector2 pos, Sprite sprite, GameObject defaultObj, int sortingOrder = 0)
+        public MapData(Vector2 pos, Sprite sprite, GameObject defaultObj, int sortingOrder = 0)
         {
             isActivate = true;
-            this.worldObj = worldObj;
             this.x = pos.x;
             this.y = pos.y;
             this.sprite = sprite;
@@ -30,15 +28,14 @@ namespace MapEditor
 
         public MapData Clone()
         {
-            var c = new MapData(worldObj, new Vector2(x, y), sprite, defaultObj, sortingOrder);
+            var c = new MapData(new Vector2(x, y), sprite, defaultObj, sortingOrder);
             c.isActivate = isActivate;
             return c;
         }
 
         public bool Compare(MapData other)
         {
-            return  worldObj == other.worldObj &&
-                    sprite == other.sprite &&
+            return  sprite == other.sprite &&
                     defaultObj == other.defaultObj;
         }
     }
@@ -207,11 +204,10 @@ namespace MapEditor
                 return render;
             
             var obj = Instantiate(data.defaultObj, pos, Quaternion.identity, mapParent);
-            data.worldObj = obj;
 
             RenderData newRenderData = obj.GetComponent<RenderData>();
             newRenderData ??= obj.AddComponent<RenderData>();
-            newRenderData.SetData(obj, pos, data.sprite, data.defaultObj, data.sortingOrder);
+            newRenderData.SetData(pos, data.sprite, data.defaultObj, data.sortingOrder);
             newRenderData.Activate(recordOld: false);
 
             mapRenders.TryAdd(pos, new List<RenderData>());
@@ -282,7 +278,7 @@ namespace MapEditor
 
                     Vector2 pos = new Vector2(r.mapData.x, r.mapData.y);
                     Debug.Log(r.mapData.sprite);
-                    var data = new MapData(null, pos, r.mapData.sprite, r.mapData.defaultObj, r.mapData.sortingOrder)
+                    var data = new MapData(pos, r.mapData.sprite, r.mapData.defaultObj, r.mapData.sortingOrder)
                     {
                         isActivate = true
                     };
