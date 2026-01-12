@@ -1,76 +1,78 @@
-using MapEditor;
 using UnityEngine;
 
-public class RenderData : MonoBehaviour
+namespace MapEditor
 {
-    public bool isErased;
-    public MapData oldMapData;
-    public MapData mapData;
-    private new SpriteRenderer renderer;
+    public class RenderData : MonoBehaviour
+    {
+        public bool isErased;
+        public MapData oldMapData;
+        public MapData mapData;
+        private new SpriteRenderer renderer;
     
-    public void Awake()
-    {
-        renderer = GetComponent<SpriteRenderer>();
-    }
+        public void Awake()
+        {
+            renderer = GetComponent<SpriteRenderer>();
+        }
 
-    public void SetData(GameObject worldObj, Vector2 pos, Sprite sprite, GameObject defaultObj)
-    {
-        isErased = false;
-        mapData = new MapData(worldObj, pos, sprite, defaultObj);
-        oldMapData = new MapData(worldObj, pos, null, defaultObj) { isActivate = false };
-    }
-    
-    public void Apply(MapData data)
-    {
-        mapData = data;
-
-        if (mapData.isActivate)
+        public void SetData(GameObject worldObj, Vector2 pos, Sprite sprite, GameObject defaultObj)
         {
             isErased = false;
+            mapData = new MapData(worldObj, pos, sprite, defaultObj);
+            oldMapData = new MapData(worldObj, pos, null, defaultObj) { isActivate = false };
+        }
+    
+        public void Apply(MapData data)
+        {
+            mapData = data.Clone();
+
+            if (mapData.isActivate)
+            {
+                isErased = false;
+                renderer.enabled = true;
+                renderer.sprite = mapData.sprite;
+            }
+            else
+            {
+                isErased = true;
+                renderer.enabled = false;
+                renderer.sprite = mapData.sprite;
+            }
+        }
+
+        public void ChangeMapData(MapData data)
+        {
+            if (mapData.Compare(data) && mapData.isActivate == data.isActivate)
+                return;
+
+            oldMapData = mapData != null ? mapData.Clone() : null;
+            mapData = data;
+            renderer.sprite = data.sprite;
+
+            if (data.isActivate)
+                Activate(recordOld: false);
+            else
+                Disable(recordOld: false);
+        }
+    
+        public void Activate(bool recordOld = true)
+        {
+            if (recordOld)
+                oldMapData = mapData.Clone();
+        
+            isErased = false;
+            mapData.isActivate = true;
             renderer.enabled = true;
             renderer.sprite = mapData.sprite;
         }
-        else
+
+        public void Disable(bool recordOld = true)
         {
+            if (recordOld)
+                oldMapData = mapData.Clone();
+        
             isErased = true;
+            mapData.isActivate = false;
             renderer.enabled = false;
-            renderer.sprite = mapData.sprite;
         }
-    }
-
-    public void ChangeMapData(MapData data)
-    {
-        if (mapData.Compare(data) && mapData.isActivate == data.isActivate)
-            return;
-
-        oldMapData = mapData != null ? mapData.Clone() : null;
-        mapData = data;
-        renderer.sprite = data.sprite;
-
-        if (data.isActivate)
-            Activate(recordOld: false);
-        else
-            Disable(recordOld: false);
-    }
-    
-    public void Activate(bool recordOld = true)
-    {
-        if (recordOld)
-            oldMapData = mapData.Clone();
-        
-        isErased = false;
-        mapData.isActivate = true;
-        renderer.enabled = true;
-        renderer.sprite = mapData.sprite;
-    }
-
-    public void Disable(bool recordOld = true)
-    {
-        if (recordOld)
-            oldMapData = mapData.Clone();
-        
-        isErased = true;
-        mapData.isActivate = false;
-        renderer.enabled = false;
     }
 }
