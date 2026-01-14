@@ -41,14 +41,14 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Decorations
-    uniqueID: 3998350999
+  - name: Floor
+    uniqueID: 3052313529
     locked: 0
   - name: Wall
     uniqueID: 1562137665
     locked: 0
-  - name: Floor
-    uniqueID: 3052313529
+  - name: Decorations
+    uniqueID: 3998350999
     locked: 0
   m_RenderingLayers:
   - Default
