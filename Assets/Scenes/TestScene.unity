@@ -157,6 +157,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
+--- !u!114 &935746903 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6558510138331551491, guid: 7b5a4ea32b05833418126021551be20d, type: 3}
+  m_PrefabInstance: {fileID: 4791047868050589862}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71c2167c0af1e674f9e67a64f23200f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MapEditor.LoadSaveUIManager
 --- !u!1 &940805787
 GameObject:
   m_ObjectHideFlags: 0
@@ -707,22 +718,30 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1654103769}
+    - target: {fileID: 1801080603290940418, guid: 7b5a4ea32b05833418126021551be20d, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1801080603290940418, guid: 7b5a4ea32b05833418126021551be20d, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1801080603290940418, guid: 7b5a4ea32b05833418126021551be20d, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1801080603290940418, guid: 7b5a4ea32b05833418126021551be20d, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1841402103843616703, guid: 7b5a4ea32b05833418126021551be20d, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1654103769}
-    - target: {fileID: 1998846541539333603, guid: 7b5a4ea32b05833418126021551be20d, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -77.68701
-      objectReference: {fileID: 0}
     - target: {fileID: 2053932911997583913, guid: 7b5a4ea32b05833418126021551be20d, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1054856767}
-    - target: {fileID: 2053932911997583913, guid: 7b5a4ea32b05833418126021551be20d, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: Redo
-      objectReference: {fileID: 0}
     - target: {fileID: 2053932911997583913, guid: 7b5a4ea32b05833418126021551be20d, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: MapEditor.GameManager, Assembly-CSharp
@@ -795,10 +814,6 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1054856767}
-    - target: {fileID: 2732281505684007376, guid: 7b5a4ea32b05833418126021551be20d, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: Undo
-      objectReference: {fileID: 0}
     - target: {fileID: 2732281505684007376, guid: 7b5a4ea32b05833418126021551be20d, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: MapEditor.GameManager, Assembly-CSharp
@@ -1097,23 +1112,19 @@ PrefabInstance:
       objectReference: {fileID: 1654103769}
     - target: {fileID: 6896758667313954684, guid: 7b5a4ea32b05833418126021551be20d, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6896758667313954684, guid: 7b5a4ea32b05833418126021551be20d, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1054856767}
+      objectReference: {fileID: 935746903}
     - target: {fileID: 6896758667313954684, guid: 7b5a4ea32b05833418126021551be20d, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: LoadMap
+      value: OnLoadFileScroll
       objectReference: {fileID: 0}
     - target: {fileID: 6896758667313954684, guid: 7b5a4ea32b05833418126021551be20d, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: MapEditor.GameManager, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 6896758667313954684, guid: 7b5a4ea32b05833418126021551be20d, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
-      value: map_test_1
+      value: MapEditor.UISaveLoadManager, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 7037746098802536419, guid: 7b5a4ea32b05833418126021551be20d, type: 3}
       propertyPath: m_AnchorMax.y
@@ -1159,6 +1170,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1654103769}
+    - target: {fileID: 7681005542331014409, guid: 7b5a4ea32b05833418126021551be20d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7858093403840857646, guid: 7b5a4ea32b05833418126021551be20d, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -1236,9 +1251,21 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1654103769}
     - target: {fileID: 8500770814628949370, guid: 7b5a4ea32b05833418126021551be20d, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8500770814628949370, guid: 7b5a4ea32b05833418126021551be20d, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1054856767}
+      objectReference: {fileID: 935746903}
+    - target: {fileID: 8500770814628949370, guid: 7b5a4ea32b05833418126021551be20d, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnSaveMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 8500770814628949370, guid: 7b5a4ea32b05833418126021551be20d, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: MapEditor.LoadSaveUIManager, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 8706304445945412995, guid: 7b5a4ea32b05833418126021551be20d, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
