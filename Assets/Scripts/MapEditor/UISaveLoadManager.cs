@@ -3,6 +3,7 @@ using UnityEngine;
 using System.IO;
 using MapEditor.Pencil;
 using TMPro;
+using UnityEngine.UI;
 
 namespace MapEditor
 {
@@ -30,8 +31,10 @@ namespace MapEditor
         public void Save()
         {
             string fileName = fileNameField.text;
-            GameManager.Instance.SaveMap(fileName);
+            if (fileName == string.Empty)
+                return;
             
+            GameManager.Instance.SaveMap(fileName);
             fileNameField.text = "";
             saveMenu.SetActive(false);
         }
@@ -48,19 +51,31 @@ namespace MapEditor
             files = Directory.GetFiles(path);
             for (int i = 0; i < files.Length; i++)
             {
+                string fileName = Path.GetFileName(files[i]);
+                fileName = fileName.Split(".json")[0];
+                Button[] button;
                 TextMeshProUGUI textMesh;
+                
                 if (i < childCount)
                 {
-                    var obj = Instantiate(ScrollDataPrefab, Vector3.zero, Quaternion.identity, fileScrollContent);
+                    var obj = fileScrollContent.GetChild(i);
+                    button = obj.GetComponentsInChildren<Button>();
                     textMesh = obj.GetComponentInChildren<TextMeshProUGUI>();
                 }
                 else
                 {
-                    textMesh = fileScrollContent.GetChild(i).GetComponentInChildren<TextMeshProUGUI>();
-                    Debug.Log(fileScrollContent.GetChild(i).name);
+                    var obj = Instantiate(ScrollDataPrefab, Vector3.zero, Quaternion.identity, fileScrollContent);
+                    button = obj.GetComponentsInChildren<Button>();
+                    textMesh = obj.GetComponentInChildren<TextMeshProUGUI>();
                 }
-
-                textMesh.text = files[i];
+                
+                textMesh.text = fileName;
+                button[0].onClick.AddListener(CloseLoad);
+                button[1].onClick.AddListener(() =>
+                {
+                    GameManager.Instance.LoadMap(fileName);
+                    CloseLoad();
+                });
             }
             loadFileScroll.SetActive(true);
         }
